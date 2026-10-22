@@ -347,6 +347,10 @@ PRODUCT_SOONG_NAMESPACES += \
     hardware/xiaomi \
     vendor/qcom/opensource/usb/etc
 
+# Stylus
+PRODUCT_PACKAGES += \
+    XiaomiStylus
+
 # Thermal
 PRODUCT_PACKAGES += \
     android.hardware.thermal-service.qti
