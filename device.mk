@@ -332,6 +332,10 @@ PRODUCT_COPY_FILES += \
     $(foreach file,o82_nova_thp_config.ini o82_nova_tm_thp_config.ini film_model.tflite glove_model.tflite palm_check.tflite water_check.tflite, \
         vendor/xiaomi/uke/proprietary/odm/firmware/$(file):$(TARGET_COPY_OUT_RECOVERY)/root/vendor/odm/firmware/$(file))
 
+# Removed apps: Twelve and Jelly are overridden by UkeRemovedApps (the others go through flags in lineage_uke.mk).
+PRODUCT_PACKAGES += \
+    UkeRemovedApps
+
 # RenderScript
 PRODUCT_PACKAGES += \
     android.hardware.renderscript@1.0-impl

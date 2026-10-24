@@ -4,6 +4,13 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
+# Apps this tablet does not ship (see also UkeRemovedApps in Android.bp, which drops Twelve and Jelly).
+# These flags have to be set before the products below are inherited.
+# No call recorder (BCR)
+TARGET_PREBUILT_BCR := false
+# No Google Phone, Google Messages or Google Contacts (the GMS telecom package)
+TARGET_INCLUDE_GOOGLE_TELECOMM := false
+
 # Inherit from those products. Most specific first.
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit_only.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
