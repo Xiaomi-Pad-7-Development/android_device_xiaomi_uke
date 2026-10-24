@@ -68,6 +68,10 @@ PRODUCT_PACKAGES += \
     charger_fw_fstab.qti \
     fstab.qcom
 
+# Memtrack
+PRODUCT_PACKAGES += \
+    vendor.qti.hardware.memtrack-service
+
 # Overlay
 PRODUCT_PACKAGES += \
     DeviceAsWebcamOverlayUke \
