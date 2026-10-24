@@ -95,6 +95,11 @@ $(call soong_config_set,power_libperfmgr,mode_extension_lib,//$(DEVICE_PATH)/pow
 # Product characteristic
 PRODUCT_CHARACTERISTICS := nosdcard,tablet
 
+# QSPA
+PRODUCT_PACKAGES += \
+    vendor.qti.qspa-service \
+    qspa_vendor.rc
+
 # Security
 PRODUCT_PACKAGES += \
     android.hardware.hardware_keystore.xml
