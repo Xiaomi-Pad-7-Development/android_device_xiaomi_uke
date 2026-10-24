@@ -7,6 +7,9 @@
 DEVICE_PATH := device/xiaomi/uke
 KERNEL_PATH := $(DEVICE_PATH)-kernel
 
+# API level
+BOARD_SHIPPING_API_LEVEL := 34
+
 # Architecture
 TARGET_ARCH := arm64
 TARGET_ARCH_VARIANT := armv8-7a
