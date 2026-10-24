@@ -7,6 +7,9 @@
 DEVICE_PATH := device/xiaomi/uke
 KERNEL_PATH := $(DEVICE_PATH)-kernel
 
+# Dolby
+TARGET_PROVIDES_DOLBY_DAX := true
+
 # Add common definitions for Qualcomm
 $(call inherit-product, hardware/qcom-caf/common/common.mk)
 
