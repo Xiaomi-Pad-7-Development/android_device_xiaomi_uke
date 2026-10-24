@@ -32,6 +32,10 @@ PRODUCT_PACKAGES += \
 # Dynamic partitions
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
 
+# Fastbootd
+PRODUCT_PACKAGES += \
+    fastbootd
+
 # Fstab
 PRODUCT_COPY_FILES += \
     $(DEVICE_PATH)/rootdir/etc/charger_fstab.qti:$(TARGET_COPY_OUT_RECOVERY)/root/vendor/etc/charger_fstab.qti \
