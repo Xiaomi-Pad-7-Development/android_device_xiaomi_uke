@@ -1,0 +1,2 @@
+# Lazy HAL service callbacks
+allow servicemanager vendor_hal_poweroptservice_qti:binder call;

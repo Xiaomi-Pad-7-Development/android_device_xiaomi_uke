@@ -1,0 +1,17 @@
+set_prop(vendor_init, vendor_displayfeature_prop)
+set_prop(vendor_init, vendor_touchfeature_prop)
+
+# Properties vendor init scripts set
+set_prop(vendor_init, vendor_qcc_prop)
+set_prop(vendor_init, vendor_ssr_prop)
+
+# Device nodes, cgroup and sysfs entries init touches while it sets the device up
+allow vendor_init { device camera_device }:chr_file getattr;
+allow vendor_init cgroup:file getattr;
+allow vendor_init sysfs:lnk_file setattr;
+
+# System-owned properties vendor init scripts set or read (livephoto support, mediaserver 64b, ntp server,
+# oem serial numbers, debugfs flag): Treble does not let vendor policy touch them
+dontaudit vendor_init radio_prop:property_service set;
+dontaudit vendor_init default_prop:property_service set;
+dontaudit vendor_init default_prop:file read;

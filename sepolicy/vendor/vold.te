@@ -1,0 +1,2 @@
+# vold lists the root of the vendor qmcs and spunvm partitions it finds at boot and does not need them
+dontaudit vold { vendor_qmcs_file vendor_spunvm_file }:dir read;
