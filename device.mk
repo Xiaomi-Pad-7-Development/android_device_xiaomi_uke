@@ -67,6 +67,12 @@ PRODUCT_PACKAGES += \
     charger_fw_fstab.qti \
     fstab.qcom
 
+# IPA
+PRODUCT_PACKAGES += \
+    ipacm \
+    IPACM_Filter_cfg.xml \
+    IPACM_cfg.xml
+
 # Memtrack
 PRODUCT_PACKAGES += \
     vendor.qti.hardware.memtrack-service
