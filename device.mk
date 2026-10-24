@@ -117,6 +117,10 @@ PRODUCT_PACKAGES += \
     android.hardware.health-service.qti \
     android.hardware.health-service.qti_recovery
 
+# Hypsys
+PRODUCT_PACKAGES += \
+    xiaomi.system.hypsys.common-service
+
 # Init
 PRODUCT_PACKAGES += \
     charger_fw_fstab.qti \
