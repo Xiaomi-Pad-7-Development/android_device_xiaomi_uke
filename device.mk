@@ -89,6 +89,27 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.midi.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.midi.xml \
     frameworks/native/data/etc/android.software.sip.voip.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.sip.voip.xml
 
+# The source-built AGM only looks in /vendor/etc/acdbdata/<sound card>, so
+# install the tablet's tuned (Forte) calibration where it expects it instead
+# of the generic Qualcomm MTP reference data.
+PRODUCT_COPY_FILES += \
+    vendor/xiaomi/uke/proprietary/odm/etc/acdbdata/Forte/Forte_acdb_cal.acdb:$(TARGET_COPY_OUT_VENDOR)/etc/acdbdata/cliffs_mtp/MTP_cliffs_acdb_cal.acdb \
+    vendor/xiaomi/uke/proprietary/odm/etc/acdbdata/Forte/Forte_workspaceFileXml.qwsp:$(TARGET_COPY_OUT_VENDOR)/etc/acdbdata/cliffs_mtp/MTP_cliffs_workspaceFileXml.qwsp
+
+# The source-built PAL reads its mixer paths and resource manager config from
+# /vendor/etc/audio/sku_<sku>, while Xiaomi ships them in /odm.
+#
+# Xiaomi's PAL also layers mixer_paths_overlay_static.xml and
+# mixer_paths_overlay_dynamic.xml over the common mixer paths; the source-built
+# PAL does not, so the tablet's real mic (SoundWire) and speaker routing was
+# never applied and the mics recorded silence. The common file below is those
+# overlays pre-merged (see configs/audio/merge_mixer_overlay.py).
+PRODUCT_COPY_FILES += \
+    $(DEVICE_PATH)/configs/audio/mixer_paths_cliffs_mtp.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio/sku_cliffs/mixer_paths_cliffs_mtp.xml \
+    vendor/xiaomi/uke/proprietary/odm/etc/audio/sku_cliffs/mixer_paths_overlay_dynamic.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio/sku_cliffs/mixer_paths_overlay_dynamic.xml \
+    vendor/xiaomi/uke/proprietary/odm/etc/audio/sku_cliffs/mixer_paths_overlay_static.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio/sku_cliffs/mixer_paths_overlay_static.xml \
+    $(DEVICE_PATH)/configs/audio/resourcemanager_cliffs_mtp.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio/sku_cliffs/resourcemanager_cliffs_mtp.xml
+
 # Bluetooth
 PRODUCT_PACKAGES += \
     audio.bluetooth.default
