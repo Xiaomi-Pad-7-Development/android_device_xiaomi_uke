@@ -1,0 +1,14 @@
+binder_call(hal_audio_default, hal_mediaeventgatherservice_default)
+hal_client_domain(hal_audio_default, hal_mediaeventgatherservice)
+
+allow hal_audio_default sound_device:chr_file rw_file_perms;
+allow hal_audio_default vendor_persist_audio_file:dir rw_dir_perms;
+allow hal_audio_default vendor_persist_audio_file:file create_file_perms;
+
+r_dir_file(hal_audio_default, vendor_sysfs_battery_supply)
+set_prop(hal_audio_default, vendor_audio_prop)
+
+# A2DP offload: the HAL reads the system-owned bluetooth_prop (persist.bluetooth.dfs.enable) and
+# default_prop (persist.latency.add.avsync.bt) properties, which Treble keeps from vendor policy.
+# It falls back to its defaults when they are unreadable
+dontaudit hal_audio_default { bluetooth_prop default_prop }:file read;

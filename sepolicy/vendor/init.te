@@ -1,0 +1,5 @@
+allow init vendor_configs_file:dir mounton;
+allow init vendor_configs_file:file mounton;
+
+# init writes vm.swappiness from a vendor rc
+allow init proc:file w_file_perms;

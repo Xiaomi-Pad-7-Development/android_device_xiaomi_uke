@@ -1,0 +1,2 @@
+# system_suspend reads one wakeup source this tree does not label; it only costs that source's stats
+dontaudit system_suspend_server sysfs:file read;

@@ -1,0 +1,14 @@
+# Camera
+vendor_hal_attribute(camerapostproc_xiaomi)
+
+# Displayfeature
+vendor_hal_attribute(displayfeature_xiaomi)
+
+# Mediagather
+hal_attribute(mediaeventgatherservice)
+
+# Sensors
+vendor_hal_attribute(citsensorservice_xiaomi)
+
+# Touchfeature
+hal_attribute(touchfeature_xiaomi)

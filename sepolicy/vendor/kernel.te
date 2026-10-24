@@ -1,0 +1,3 @@
+# Kernel worker noise: binding a privileged port and walking /mnt/vendor
+dontaudit kernel self:capability net_bind_service;
+dontaudit kernel mnt_vendor_file:dir search;

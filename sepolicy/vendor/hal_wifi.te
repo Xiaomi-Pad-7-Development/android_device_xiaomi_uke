@@ -1,0 +1,2 @@
+# Debug-only property, readable only on userdebug builds
+dontaudit hal_wifi_default persist_vendor_debug_wifi_prop:file read;
