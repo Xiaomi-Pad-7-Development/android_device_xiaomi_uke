@@ -306,11 +306,24 @@ PRODUCT_PACKAGES += \
     rfs_msm_mpss_readonly_mbnconfig_symlink
 
 # Recovery touch
+PRODUCT_PACKAGES += \
+    recovery_touch_thp
+
+PRODUCT_COPY_FILES += \
+    $(foreach lib,libtensorflowlite_touch_c libtouchreport libtouchsensor, \
+        vendor/xiaomi/uke/proprietary/odm/lib64/$(lib).so:$(TARGET_COPY_OUT_RECOVERY)/root/system/lib64/$(lib).so)
+
 # The NT36532 has no flash: nt36532_touch downloads its firmware at probe.
 # Recovery doesn't mount /odm, so ship the firmware in its ramdisk.
 PRODUCT_COPY_FILES += \
     $(foreach panel,csot tm, \
         vendor/xiaomi/uke/proprietary/odm/firmware/novatek_nt36532_o82_fw_$(panel).bin:$(TARGET_COPY_OUT_RECOVERY)/root/lib/firmware/novatek_nt36532_o82_fw_$(panel).bin)
+
+# ...and then needs the THP daemon's configs and models to report events.
+# Recovery's /odm/firmware is a dangling symlink to /vendor/odm/firmware.
+PRODUCT_COPY_FILES += \
+    $(foreach file,o82_nova_thp_config.ini o82_nova_tm_thp_config.ini film_model.tflite glove_model.tflite palm_check.tflite water_check.tflite, \
+        vendor/xiaomi/uke/proprietary/odm/firmware/$(file):$(TARGET_COPY_OUT_RECOVERY)/root/vendor/odm/firmware/$(file))
 
 # RenderScript
 PRODUCT_PACKAGES += \
