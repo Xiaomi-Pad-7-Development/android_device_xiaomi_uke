@@ -305,6 +305,13 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     rfs_msm_mpss_readonly_mbnconfig_symlink
 
+# Recovery touch
+# The NT36532 has no flash: nt36532_touch downloads its firmware at probe.
+# Recovery doesn't mount /odm, so ship the firmware in its ramdisk.
+PRODUCT_COPY_FILES += \
+    $(foreach panel,csot tm, \
+        vendor/xiaomi/uke/proprietary/odm/firmware/novatek_nt36532_o82_fw_$(panel).bin:$(TARGET_COPY_OUT_RECOVERY)/root/lib/firmware/novatek_nt36532_o82_fw_$(panel).bin)
+
 # RenderScript
 PRODUCT_PACKAGES += \
     android.hardware.renderscript@1.0-impl
