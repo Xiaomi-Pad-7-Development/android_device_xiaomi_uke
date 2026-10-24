@@ -63,6 +63,17 @@ PRODUCT_PACKAGES += \
     charger_fw_fstab.qti \
     fstab.qcom
 
+# Overlay
+PRODUCT_PACKAGES += \
+    DeviceAsWebcamOverlayUke \
+    FrameworkOverlayUke \
+    LineageSDKOverlayUke \
+    NcmTetheringOverlay \
+    SettingsOverlayUke \
+    SettingsProviderOverlayUke \
+    SystemUIOverlayUke \
+    WifiOverlayUke
+
 # Product characteristic
 PRODUCT_CHARACTERISTICS := nosdcard,tablet
 
