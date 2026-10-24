@@ -40,6 +40,35 @@ TARGET_NO_BOOTLOADER := true
 # Hardware
 BOARD_USES_QCOM_HARDWARE := true
 
+# Kernel
+BOARD_KERNEL_BASE        := 0x00000000
+BOARD_KERNEL_PAGESIZE    := 4096
+
+BOARD_KERNEL_CMDLINE := \
+    disable_dma32=on \
+    sysctl.kernel.firmware_config.force_sysfs_fallback=1 \
+    swinfo.fingerprint=$(LINEAGE_VERSION) \
+    mtdoops.fingerprint=$(LINEAGE_VERSION)
+
+BOARD_BOOTCONFIG := \
+    androidboot.console=0 \
+    androidboot.hardware=qcom \
+    androidboot.load_modules_parallel=true \
+    androidboot.memcg=1 \
+    androidboot.vendor.qspa=true \
+    androidboot.usbcontroller=a600000.dwc3
+
+BOARD_INCLUDE_DTB_IN_BOOTIMG := true
+BOARD_RAMDISK_USE_LZ4 := true
+
+BOARD_BOOT_HEADER_VERSION := 4
+BOARD_INIT_BOOT_HEADER_VERSION := 4
+BOARD_MKBOOTIMG_ARGS := --header_version $(BOARD_BOOT_HEADER_VERSION)
+BOARD_MKBOOTIMG_INIT_ARGS += --header_version $(BOARD_INIT_BOOT_HEADER_VERSION)
+
+BOARD_KERNEL_IMAGE_NAME := Image
+BOARD_USES_GENERIC_KERNEL_IMAGE := true
+
 # Partitions
 BOARD_BOOTIMAGE_PARTITION_SIZE := 100663296
 BOARD_DTBOIMG_PARTITION_SIZE := 25165824
