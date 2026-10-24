@@ -7,6 +7,8 @@
 DEVICE_PATH := device/xiaomi/uke
 KERNEL_PATH := $(DEVICE_PATH)-kernel
 
+BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
+
 # A/B
 AB_OTA_PARTITIONS := \
     boot \
@@ -156,3 +158,6 @@ BOARD_AVB_VBMETA_SYSTEM_ROLLBACK_INDEX_LOCATION := 1
 # Workaround to make lineage's soong generator work
 TARGET_KERNEL_SOURCE := $(KERNEL_PATH)/kernel-headers
 WITH_DEXPREOPT_ART_BOOT_IMG_ONLY := true
+
+# Inherit the proprietary files
+include vendor/xiaomi/uke/BoardConfigVendor.mk

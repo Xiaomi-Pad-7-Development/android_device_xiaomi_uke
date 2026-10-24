@@ -69,3 +69,6 @@ PRODUCT_PACKAGES += \
     update_engine \
     update_engine_sideload \
     update_verifier
+
+# Inherit from the proprietary files makefile.
+$(call inherit-product, vendor/xiaomi/uke/uke-vendor.mk)
