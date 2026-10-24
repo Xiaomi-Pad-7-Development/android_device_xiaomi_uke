@@ -171,6 +171,10 @@ PRODUCT_PACKAGES += \
     vendor.qti.qspa-service \
     qspa_vendor.rc
 
+# RenderScript
+PRODUCT_PACKAGES += \
+    android.hardware.renderscript@1.0-impl
+
 # Security
 PRODUCT_PACKAGES += \
     android.hardware.hardware_keystore.xml
