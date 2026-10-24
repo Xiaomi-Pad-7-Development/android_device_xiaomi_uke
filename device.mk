@@ -32,6 +32,63 @@ PRODUCT_PACKAGES += \
     otapreopt_script \
     checkpoint_gc
 
+# Audio
+PRODUCT_PACKAGES += \
+    audioadsprpcd \
+    android.hardware.audio.service
+
+PRODUCT_PACKAGES += \
+    android.hardware.audio@7.1-impl \
+    android.hardware.audio.effect@7.0-impl \
+    android.hardware.soundtrigger@2.3-impl \
+    vendor.qti.hardware.AGMIPC@1.0-impl \
+    vendor.qti.hardware.pal@1.0-impl
+
+PRODUCT_PACKAGES += \
+    audio.primary.default \
+    audio.r_submix.default \
+    audio.usbv2.default
+
+PRODUCT_PACKAGES += \
+    audio.primary.pineapple \
+    lib_bt_aptx \
+    lib_bt_ble \
+    lib_bt_bundle \
+    libagm_compress_plugin \
+    libagm_mixer_plugin \
+    libagm_pcm_plugin \
+    libar-pal \
+    libaudiochargerlistener \
+    libbatterylistener \
+    libcustomva_intf \
+    libfmpal \
+    libhfp_pal \
+    libhotword_intf \
+    libpalclient \
+    libqcompostprocbundle \
+    libqcomvisualizer \
+    libqcomvoiceprocessing \
+    libsndcardparser \
+    libvolumelistener
+
+AUDIO_HAL_DIR := hardware/qcom-caf/sm8650/audio/primary-hal
+
+PRODUCT_COPY_FILES += \
+    $(DEVICE_PATH)/configs/audio/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio/sku_cliffs/audio_effects.xml \
+    $(DEVICE_PATH)/configs/audio/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.xml \
+    $(DEVICE_PATH)/configs/audio/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio/sku_cliffs/audio_policy_configuration.xml \
+    $(DEVICE_PATH)/configs/audio/usbv2_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/usbv2_audio_policy_configuration.xml
+
+PRODUCT_COPY_FILES += \
+    frameworks/av/services/audiopolicy/config/audio_policy_volumes.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_volumes.xml \
+    frameworks/av/services/audiopolicy/config/default_volume_tables.xml:$(TARGET_COPY_OUT_VENDOR)/etc/default_volume_tables.xml \
+    frameworks/av/services/audiopolicy/config/r_submix_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/r_submix_audio_policy_configuration.xml \
+    frameworks/av/services/audiopolicy/config/usb_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/usb_audio_policy_configuration.xml \
+    frameworks/native/data/etc/android.hardware.audio.low_latency.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.audio.low_latency.xml \
+    frameworks/native/data/etc/android.hardware.audio.pro.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.audio.pro.xml \
+    frameworks/native/data/etc/android.software.midi.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.midi.xml \
+    frameworks/native/data/etc/android.software.sip.voip.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.sip.voip.xml
+
 # Bluetooth
 PRODUCT_PACKAGES += \
     audio.bluetooth.default
@@ -142,6 +199,12 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.consumerir.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.consumerir.xml
+
+# Media
+PRODUCT_COPY_FILES += \
+    $(AUDIO_HAL_DIR)/configs/common/codec2/media_codecs_c2_audio.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_c2_audio.xml \
+    $(AUDIO_HAL_DIR)/configs/common/codec2/service/1.0/c2audio.vendor.base-arm64.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/c2audio.vendor.base-arm64.policy \
+    $(AUDIO_HAL_DIR)/configs/common/codec2/service/1.0/c2audio.vendor.ext-arm64.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/c2audio.vendor.ext-arm64.policy
 
 # Memtrack
 PRODUCT_PACKAGES += \
