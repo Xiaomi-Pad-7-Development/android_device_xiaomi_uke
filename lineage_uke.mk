@@ -29,3 +29,17 @@ PRODUCT_MODEL := Xiaomi Pad 7
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
     BuildDesc="missi-user 16 BP2A.250605.031.A3 OS3.0.304.0.WOZMIXM release-keys"
+
+# Axion Device Configuration
+AXION_MAINTAINER := delano-git
+AXION_PROCESSOR := Snapdragon®_7+_Gen_3
+
+# Camera Info
+AXION_CAMERA_REAR_INFO := 13
+AXION_CAMERA_FRONT_INFO := 8
+
+# Graphics & Display
+TARGET_ENABLE_BLUR := true
+TARGET_SUPPORTED_REFRESH_RATES := 60,90,120,144
+HBM_SUPPORTED := true
+HBM_NODE := /data/vendor/display/hbm_mode
