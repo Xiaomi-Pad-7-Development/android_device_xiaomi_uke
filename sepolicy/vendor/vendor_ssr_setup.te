@@ -1,0 +1,4 @@
+allow vendor_ssr_setup vendor_sysfs_ssr_coredump_toggle:{ chr_file file } rw_file_perms;
+
+# Subsystem coredump switch under sysfs
+allow vendor_ssr_setup sysfs:file w_file_perms;

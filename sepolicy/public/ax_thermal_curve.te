@@ -1,0 +1,2 @@
+# Throttling curve settings, written by Settings and read by the vendor daemon
+system_public_prop(ax_thermal_curve_prop)

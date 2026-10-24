@@ -1,0 +1,21 @@
+# Audio
+ro.chipname             u:object_r:exported_system_prop:s0
+ro.mediatek.platform    u:object_r:exported_system_prop:s0
+
+# Batterysecret
+ro.product.locale.region      u:object_r:exported_system_prop:s0
+ro.product.locale.language    u:object_r:exported_system_prop:s0
+
+# Camera
+ro.miui.region            u:object_r:exported_system_prop:s0
+system.algo.aivs.debug    u:object_r:exported_system_prop:s0
+
+# Displayfeature
+persist.sys.multi_display_type    u:object_r:exported_system_prop:s0
+
+# Pen
+persist.pen.events.disabled        u:object_r:system_pen_prop:s0
+persist.pen.pressure_scale         u:object_r:system_pen_prop:s0
+persist.pen.0g_activation          u:object_r:system_pen_prop:s0
+persist.pen.min_activation_pressure u:object_r:system_pen_prop:s0
+persist.sys.ax.thermal_curve u:object_r:ax_thermal_curve_prop:s0
