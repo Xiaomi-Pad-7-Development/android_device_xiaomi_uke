@@ -79,6 +79,15 @@ PRODUCT_PACKAGES += \
     SystemUIOverlayUke \
     WifiOverlayUke
 
+# Power
+PRODUCT_PACKAGES += \
+    android.hardware.power-service.lineage-libperfmgr
+
+PRODUCT_COPY_FILES += \
+    $(DEVICE_PATH)/configs/power/powerhint.json:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.json
+
+$(call soong_config_set,power_libperfmgr,mode_extension_lib,//$(DEVICE_PATH)/power:libpowermode-ext-xiaomi)
+
 # Product characteristic
 PRODUCT_CHARACTERISTICS := nosdcard,tablet
 
