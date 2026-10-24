@@ -150,6 +150,12 @@ PRODUCT_PACKAGES += \
     SystemUIOverlayUke \
     WifiOverlayUke
 
+# Partitions
+PRODUCT_PACKAGES += \
+    vendor_bt_firmware_mountpoint \
+    vendor_dsp_mountpoint \
+    vendor_firmware_mnt_mountpoint
+
 # Power
 PRODUCT_PACKAGES += \
     android.hardware.power-service.lineage-libperfmgr
@@ -166,6 +172,10 @@ PRODUCT_CHARACTERISTICS := nosdcard,tablet
 PRODUCT_PACKAGES += \
     vendor.qti.qspa-service \
     qspa_vendor.rc
+
+# Radio
+PRODUCT_PACKAGES += \
+    rfs_msm_mpss_readonly_mbnconfig_symlink
 
 # RenderScript
 PRODUCT_PACKAGES += \
