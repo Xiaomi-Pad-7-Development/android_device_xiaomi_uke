@@ -155,6 +155,10 @@ DEVICE_MATRIX_FILE := hardware/qcom-caf/common/compatibility_matrix.xml
 DEVICE_MANIFEST_FILE := \
     $(DEVICE_PATH)/configs/hidl/manifest.xml
 
+# Vendor security patch
+BOOT_SECURITY_PATCH := 2026-01-01
+VENDOR_SECURITY_PATCH := $(BOOT_SECURITY_PATCH)
+
 # Verified Boot
 BOARD_AVB_ENABLE := true
 BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS += --flags 3
