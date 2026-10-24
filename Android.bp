@@ -54,3 +54,10 @@ install_symlink {
     installed_location: "rfs/msm/mpss/readonly/mbnconfig",
     symlink_target: "/data/vendor/mbnconfig",
 }
+
+prebuilt_hidl_interfaces {
+    name: "hidl_intentaware_interface",
+    interfaces: [
+        "vendor.xiaomi.hardware.intentaware@1.0::IIntentAwareService",
+    ],
+}
