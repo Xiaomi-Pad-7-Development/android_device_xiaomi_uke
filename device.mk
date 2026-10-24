@@ -276,6 +276,9 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     rfs_msm_mpss_readonly_mbnconfig_symlink
 
+# Recovery
+$(call soong_config_set_bool,recovery,target_recovery_uses_qti_drm,true)
+
 # Recovery touch
 PRODUCT_PACKAGES += \
     recovery_touch_thp
