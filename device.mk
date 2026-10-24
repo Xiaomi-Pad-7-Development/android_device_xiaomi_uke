@@ -250,6 +250,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.consumerir.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.consumerir.xml
 
+# Kernel Manager
+PRODUCT_COPY_FILES += \
+    $(DEVICE_PATH)/configs/ax_kernel_manager.xml:$(TARGET_COPY_OUT_VENDOR)/etc/ax_kernel_manager.xml
+
 # Light
 PRODUCT_PACKAGES += \
     android.hardware.lights-service.xiaomi
