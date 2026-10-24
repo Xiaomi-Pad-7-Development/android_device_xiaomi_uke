@@ -15,3 +15,12 @@ PRODUCT_CHARACTERISTICS := nosdcard,tablet
 
 # Shipping API level
 PRODUCT_SHIPPING_API_LEVEL := 34
+
+# Soong namespaces
+PRODUCT_SOONG_NAMESPACES += \
+    $(DEVICE_PATH) \
+    hardware/google/interfaces \
+    hardware/google/pixel \
+    hardware/lineage/interfaces/power-libperfmgr \
+    hardware/xiaomi \
+    vendor/qcom/opensource/usb/etc
