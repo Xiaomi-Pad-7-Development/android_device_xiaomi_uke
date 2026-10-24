@@ -1,0 +1,1 @@
+Apps removed from the uke image: BCR, Google Phone, Google Messages, Google Contacts, Twelve, Jelly.
