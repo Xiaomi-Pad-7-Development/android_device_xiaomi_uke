@@ -7,3 +7,19 @@
 DEVICE_PATH := device/xiaomi/uke
 KERNEL_PATH := $(DEVICE_PATH)-kernel
 
+# Architecture
+TARGET_ARCH := arm64
+TARGET_ARCH_VARIANT := armv8-7a
+TARGET_CPU_ABI := arm64-v8a
+TARGET_CPU_VARIANT := generic
+TARGET_CPU_VARIANT_RUNTIME := kryo300
+
+# Bootloader
+TARGET_NO_BOOTLOADER := true
+
+# Hardware
+BOARD_USES_QCOM_HARDWARE := true
+
+# Platform
+TARGET_BOARD_PLATFORM := pineapple
+TARGET_BOOTLOADER_BOARD_NAME := uke
