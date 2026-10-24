@@ -61,3 +61,17 @@ prebuilt_hidl_interfaces {
         "vendor.xiaomi.hardware.intentaware@1.0::IIntentAwareService",
     ],
 }
+
+// Apps this tablet does not ship. Installing this file replaces them in the image (overrides), which is how
+// Twelve and Jelly are dropped from the Lineage package list. BCR and the Google Phone and Messages apps are
+// removed with build flags in lineage_uke.mk (as is Google Contacts); keep the list there and here in step.
+prebuilt_etc {
+    name: "UkeRemovedApps",
+    src: "configs/removed_apps.txt",
+    filename: "uke_removed_apps.txt",
+    product_specific: true,
+    overrides: [
+        "Twelve",
+        "Jelly",
+    ],
+}
