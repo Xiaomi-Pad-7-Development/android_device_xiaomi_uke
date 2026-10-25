@@ -162,3 +162,30 @@ bluetooth.device.default_name=Xiaomi Pad 7
 
 # USB
 vendor.usb.product_string=Xiaomi Pad 7
+
+# Audio (stock)
+audio.spatializer.pose_predictor_type=2
+audio.spatializer.prediction_duration_ms=50
+persist.vendor.audio.fpsop.game.effect.switch=true
+persist.vendor.audio.silencelowpower.support=true
+ro.vendor.audio.aac.para.modify.support=true
+ro.vendor.audio.adsp.dolbyht=true
+ro.vendor.audio.denoiseutils=true
+ro.vendor.audio.dolby4ch=true
+ro.vendor.audio.ear.scan.support=true
+ro.vendor.audio.fweffect=true
+ro.vendor.audio.game.effect=true
+ro.vendor.audio.game.spatialmode=1
+ro.vendor.audio.game_enhance=true
+ro.vendor.audio.game_spatializer=true
+ro.vendor.audio.meeting.mode=1
+ro.vendor.audio.meeting.mode.type=1
+ro.vendor.audio.multichannel.5point1=true
+ro.vendor.audio.pad.adapter=7
+ro.vendor.audio.pad.no.modem=true
+ro.vendor.audio.sd.support=true
+ro.vendor.audio.spatializer.support.speaker=true
+ro.vendor.audio.support.voiprx.441khz=true
+vendor.audio.dolby.control.support=true
+vendor.audio.useXiaomiSpatializer=true
+vendor.audio.wps.resume=false
