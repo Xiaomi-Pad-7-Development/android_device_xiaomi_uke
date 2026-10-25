@@ -1,2 +1,6 @@
+allow servicemanager hal_aidl_dms_server:dir search;
+allow servicemanager hal_aidl_dms_server:file { open read };
+allow servicemanager hal_aidl_dms_server:process getattr;
+
 # Lazy HAL service callbacks
 allow servicemanager vendor_hal_poweroptservice_qti:binder call;

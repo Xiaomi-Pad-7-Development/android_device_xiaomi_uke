@@ -10,6 +10,9 @@ vendor.xiaomi.hardware.display.mihwcextension.IMiHwcExtension/default    u:objec
 # Displayfeature
 vendor.xiaomi.hardware.displayfeature_aidl.IDisplayFeature/default    u:object_r:vendor_hal_displayfeature_xiaomi_service:s0
 
+# Dolby
+vendor.dolby.dms.IDms/default    u:object_r:hal_aidl_dms_service:s0
+
 # Hypsys
 xiaomi.system.hypsys.common.IHypSysSsi/default        u:object_r:hal_hypsys_service:s0
 xiaomi.system.hypsys.common.IHypSysSsiIntl/default    u:object_r:hal_hypsys_service:s0

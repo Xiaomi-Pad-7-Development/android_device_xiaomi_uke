@@ -1,0 +1,17 @@
+type hal_aidl_dms_default, domain;
+type hal_aidl_dms_default_exec, file_type, exec_type, vendor_file_type;
+
+init_daemon_domain(hal_aidl_dms_default)
+hal_server_domain(hal_aidl_dms_default, hal_aidl_dms)
+hal_attribute_service(hal_aidl_dms, hal_aidl_dms_service)
+
+binder_use(hal_aidl_dms_server)
+binder_call(hal_aidl_dms_client, hal_aidl_dms_server)
+binder_call(hal_aidl_dms_server, hal_aidl_dms_client)
+
+allow hal_aidl_dms_default vendor_dolby_file:dir rw_dir_perms;
+allow hal_aidl_dms_default vendor_dolby_file:file create_file_perms;
+
+set_prop(hal_aidl_dms_default, vendor_audio_prop)
+
+hal_client_domain(dumpstate, hal_aidl_dms)

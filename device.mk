@@ -120,6 +120,10 @@ PRODUCT_PACKAGES += \
     android.hardware.graphics.composer3-V2-ndk.vendor \
     vendor.qti.hardware.display.composer3-V1-ndk.vendor
 
+# Dolby
+PRODUCT_PACKAGES += \
+    DolbyAtmos
+
 # DRM
 PRODUCT_PACKAGES += \
     android.hardware.drm-service.clearkey

@@ -4,6 +4,9 @@ vendor_hal_attribute(camerapostproc_xiaomi)
 # Displayfeature
 vendor_hal_attribute(displayfeature_xiaomi)
 
+# Dolby
+hal_attribute(aidl_dms)
+
 # Mediagather
 hal_attribute(mediaeventgatherservice)
 
