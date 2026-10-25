@@ -164,24 +164,26 @@
         <!--DOLBY END-->
     </effects>
     <postprocess>
-        <!-- Nothing is applied to the music stream (music_helper, dlb_music_listener): enabling any session
-             effect suspends every global effect (AudioFlinger ThreadBase::checkSuspendOnEffectEnabled),
-             which kept ViPER4Android from processing. -->
-
+        <!--
+            Xiaomi only lays out the four speakers inside Dolby. Without it
+            the DSP falls back to a portrait map that drives one pair and
+            leaves the other dead, so a tablet with no Dolby has half its
+            speakers whenever someone holds it upright.
+        -->
+        <stream type="music">
+            <apply effect="dlb_music_listener"/>
+        </stream>
         <stream type="ring">
             <apply effect="ring_helper"/>
-            <apply effect="dlb_ring_listener"/>
         </stream>
         <stream type="alarm">
             <apply effect="alarm_helper"/>
-            <apply effect="dlb_alarm_listener"/>
         </stream>
         <stream type="voice_call">
             <apply effect="voice_helper"/>
         </stream>
         <stream type="notification">
             <apply effect="notification_helper"/>
-            <apply effect="dlb_notification_listener"/>
         </stream>
     </postprocess>
     <preprocess>
