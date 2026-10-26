@@ -2,5 +2,10 @@
   {
     "repository": "android_hardware_xiaomi",
     "target_path": "hardware/xiaomi"
+  },
+  {
+    "repository": "PixelOS-AOSP/android_packages_apps_DolbyAtmos",
+    "target_path": "packages/apps/DolbyAtmos",
+    "branch": "sixteen-qpr2"
   }
 ]
