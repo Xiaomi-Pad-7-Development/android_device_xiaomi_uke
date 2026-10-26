@@ -37,6 +37,9 @@ persist.sys.disable_sdr_dimming=true
 # Media
 media.stagefright.audio.deep=true
 
+# Surfaceflinger
+debug.sf.disable_backpressure=1
+
 # RKPD
 remote_provisioning.enable_rkpd=true
 remote_provisioning.hostname=remoteprovisioning.googleapis.com
