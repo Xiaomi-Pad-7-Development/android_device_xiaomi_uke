@@ -1,0 +1,2 @@
+# Throttling curve switch and curves, written by Settings
+set_prop(system_app, ax_thermal_curve_prop)

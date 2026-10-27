@@ -1,0 +1,20 @@
+type ax_thermal_curve, domain;
+type ax_thermal_curve_exec, exec_type, vendor_file_type, file_type;
+init_daemon_domain(ax_thermal_curve)
+
+allow ax_thermal_curve vendor_shell_exec:file rx_file_perms;
+allow ax_thermal_curve vendor_toolbox_exec:file rx_file_perms;
+
+get_prop(ax_thermal_curve, ax_thermal_curve_prop)
+
+allow ax_thermal_curve sysfs_thermal:dir r_dir_perms;
+allow ax_thermal_curve sysfs_thermal:file rw_file_perms;
+allow ax_thermal_curve sysfs_thermal:lnk_file r_file_perms;
+allow ax_thermal_curve sysfs_devices_system_cpu:dir r_dir_perms;
+allow ax_thermal_curve sysfs_devices_system_cpu:file rw_file_perms;
+allow ax_thermal_curve vendor_sysfs_kgsl:dir r_dir_perms;
+allow ax_thermal_curve vendor_sysfs_kgsl:file rw_file_perms;
+allow ax_thermal_curve vendor_sysfs_kgsl:lnk_file r_file_perms;
+
+# init triggers on persist.sys.ax.thermal_curve
+get_prop(vendor_init, ax_thermal_curve_prop)
