@@ -1,0 +1,8 @@
+on boot
+    chown system system /sys/class/qcom-battery/smart_chg
+    chmod 0660 /sys/class/qcom-battery/smart_chg
+
+service vendor.lineage_health /vendor/bin/hw/vendor.lineage.health-service.uke
+    class hal
+    user system
+    group system

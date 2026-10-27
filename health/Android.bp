@@ -1,0 +1,21 @@
+//
+// SPDX-FileCopyrightText: 2026 The LineageOS Project
+// SPDX-License-Identifier: Apache-2.0
+//
+
+cc_binary {
+    name: "vendor.lineage.health-service.uke",
+    init_rc: ["vendor.lineage.health-service.uke.rc"],
+    vintf_fragments: ["vendor.lineage.health-service.uke.xml"],
+    relative_install_path: "hw",
+    vendor: true,
+    srcs: [
+        "ChargingControl.cpp",
+        "service.cpp",
+    ],
+    shared_libs: [
+        "libbase",
+        "libbinder_ndk",
+        "vendor.lineage.health-V2-ndk",
+    ],
+}

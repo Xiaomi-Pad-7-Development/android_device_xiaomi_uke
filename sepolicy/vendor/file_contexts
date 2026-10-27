@@ -31,6 +31,9 @@
 # Lights HAL
 /vendor/bin/hw/android\.hardware\.lights-service\.xiaomi    u:object_r:hal_light_default_exec:s0
 
+# Lineage Health
+/vendor/bin/hw/vendor\.lineage\.health-service\.uke    u:object_r:hal_lineage_health_default_exec:s0
+
 # Media
 /data/vendor/dolby(/.*)?                                     u:object_r:vendor_dolby_file:s0
 /vendor/bin/hw/dolbycodec2                                   u:object_r:vendorcodec_exec:s0

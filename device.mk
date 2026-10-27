@@ -169,6 +169,10 @@ PRODUCT_PACKAGES += \
     android.hardware.health-service.qti \
     android.hardware.health-service.qti_recovery
 
+# Lineage Health
+PRODUCT_PACKAGES += \
+    vendor.lineage.health-service.uke
+
 # Hypsys
 PRODUCT_PACKAGES += \
     xiaomi.system.hypsys.common-service
