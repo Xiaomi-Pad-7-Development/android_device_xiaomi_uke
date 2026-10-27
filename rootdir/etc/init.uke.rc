@@ -32,3 +32,19 @@ on property:sys.boot_completed=1
 # after boot completes; that script only picks lz4 for low_ram (Go) targets.
 on boot
     write /sys/block/zram0/comp_algorithm lz4
+
+# User-defined throttling curve (replaces mi_thermald while enabled)
+service vendor.ax_thermal_curve /vendor/bin/ax_thermal_curve.sh
+    class main
+    user root
+    group root system
+    disabled
+
+on property:sys.boot_completed=1 && property:persist.sys.ax.thermal_curve=1
+    stop mi_thermald
+    start vendor.ax_thermal_curve
+
+on property:persist.sys.ax.thermal_curve=0
+    stop vendor.ax_thermal_curve
+    exec - root system -- /vendor/bin/ax_thermal_curve.sh restore
+    start mi_thermald

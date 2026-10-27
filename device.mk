@@ -359,6 +359,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.thermal-service.qti
 
+# User-defined throttling curve, off until persist.sys.ax.thermal_curve is set to 1
+PRODUCT_PACKAGES += \
+    ax_thermal_curve.sh
+
 # Update engine
 PRODUCT_PACKAGES += \
     update_engine \

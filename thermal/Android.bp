@@ -1,0 +1,10 @@
+//
+// SPDX-FileCopyrightText: 2026 The LineageOS Project
+// SPDX-License-Identifier: Apache-2.0
+//
+
+sh_binary {
+    name: "ax_thermal_curve.sh",
+    src: "ax_thermal_curve.sh",
+    vendor: true,
+}
