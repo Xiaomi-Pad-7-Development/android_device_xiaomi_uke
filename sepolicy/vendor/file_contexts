@@ -55,6 +55,9 @@
 /sys/devices/platform/soc/3000000.remoteproc-adsp/remoteproc/remoteproc[0-9]+/coredump     u:object_r:vendor_sysfs_ssr_coredump_toggle:s0
 /sys/devices/platform/soc/32300000.remoteproc-cdsp/remoteproc/remoteproc[0-9]+/coredump    u:object_r:vendor_sysfs_ssr_coredump_toggle:s0
 
+# Stylus
+/dev/hidraw([0-9]+)    u:object_r:hidraw_device:s0
+
 # Thermal
 /data/vendor/thermal(/.*)?                                               u:object_r:thermal_data_file:s0
 /sys/{class,devices/virtual}/thermal/thermal_message/flash_state         u:object_r:sys_thermal_flash_state:s0
