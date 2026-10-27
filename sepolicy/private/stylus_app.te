@@ -6,8 +6,11 @@ binder_call(stylus_app, hal_touchfeature_xiaomi_default)
 
 allow stylus_app activity_service:service_manager find;
 allow stylus_app bluetooth_manager_service:service_manager find;
+allow stylus_app content_capture_service:service_manager find;
 allow stylus_app hal_touchfeature_xiaomi_service:service_manager find;
 allow stylus_app input_service:service_manager find;
+allow stylus_app netstats_service:service_manager find;
+allow stylus_app thermal_service:service_manager find;
 
 allow stylus_app self:netlink_kobject_uevent_socket { bind create getopt read setopt };
 dontaudit stylus_app self:capability net_admin;
