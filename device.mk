@@ -223,7 +223,9 @@ PRODUCT_COPY_FILES += \
 
 # Keylayout
 PRODUCT_COPY_FILES += \
-    $(DEVICE_PATH)/configs/keylayout/uinput-xiaomi.kl:$(TARGET_COPY_OUT_ODM)/usr/keylayout/uinput-xiaomi.kl
+    $(DEVICE_PATH)/configs/keylayout/uinput-xiaomi.kl:$(TARGET_COPY_OUT_ODM)/usr/keylayout/uinput-xiaomi.kl \
+    $(DEVICE_PATH)/configs/keylayout/Vendor_0022_Product_5081.kl:$(TARGET_COPY_OUT_ODM)/usr/keylayout/Vendor_0022_Product_5081.kl \
+    $(DEVICE_PATH)/configs/idc/Vendor_0022_Product_5081.idc:$(TARGET_COPY_OUT_ODM)/usr/idc/Vendor_0022_Product_5081.idc
 
 # Kernel Manager
 PRODUCT_COPY_FILES += \

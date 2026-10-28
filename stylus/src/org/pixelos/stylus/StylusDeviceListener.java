@@ -62,6 +62,7 @@ final class StylusDeviceListener implements InputManager.InputDeviceListener {
             return;
         }
 
+        keepEnabled(device);
         mPens.put(deviceId, version);
         Log.i(TAG, "Pen " + device.getName() + " connected, version " + version);
         TouchFeature.setModeValue(TouchFeature.MODE_PEN_CONNECTION, version | PEN_CONNECTED);
@@ -97,7 +98,30 @@ final class StylusDeviceListener implements InputManager.InputDeviceListener {
     }
 
     @Override
-    public void onInputDeviceChanged(int deviceId) {}
+    public void onInputDeviceChanged(int deviceId) {
+        if (mPens.indexOfKey(deviceId) < 0) {
+            onInputDeviceAdded(deviceId);
+            return;
+        }
+        InputDevice device = mInputManager.getInputDevice(deviceId);
+        if (device != null) {
+            keepEnabled(device);
+        }
+    }
+
+    /*
+     * The pen registers its mouse node before its keyboard and stylus nodes,
+     * and the Bluetooth pointer suppression can disable it while it is only
+     * a mouse. Its gestures come from the keyboard node, so turn it back on.
+     */
+    private void keepEnabled(InputDevice device) {
+        if (device.isEnabled() || !(device.supportsSource(InputDevice.SOURCE_KEYBOARD)
+                || device.supportsSource(InputDevice.SOURCE_STYLUS))) {
+            return;
+        }
+        Log.i(TAG, "Re-enabling pen input device " + device.getName());
+        mInputManager.enableInputDevice(device.getId());
+    }
 
     private static int getPenVersion(int vendorId, int productId) {
         if (vendorId == 0x1915) {
