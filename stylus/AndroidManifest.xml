@@ -12,9 +12,44 @@
     <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
     <uses-permission android:name="android.permission.DISABLE_INPUT_DEVICE" />
     <uses-permission android:name="android.permission.LOCAL_MAC_ADDRESS" />
+    <uses-permission android:name="android.permission.MONITOR_INPUT" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <application
         android:name=".StylusApplication"
         android:directBootAware="true"
-        android:persistent="true" />
+        android:persistent="true">
+
+        <activity
+            android:name=".StylusSettingsActivity"
+            android:exported="true"
+            android:label="@string/stylus_title"
+            android:process=":settings"
+            android:theme="@style/Theme.PenGestures">
+            <intent-filter>
+                <action android:name="com.android.settings.action.IA_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data
+                android:name="com.android.settings.category"
+                android:value="com.android.settings.category.ia.system" />
+            <!-- Between Mouse (-252) and Gestures (-250) -->
+            <meta-data
+                android:name="com.android.settings.order"
+                android:value="-251" />
+            <meta-data
+                android:name="com.android.settings.icon"
+                android:resource="@drawable/ic_stylus" />
+            <meta-data
+                android:name="com.android.settings.summary"
+                android:resource="@string/stylus_summary" />
+        </activity>
+
+        <activity
+            android:name=".GestureSettingsActivity"
+            android:exported="false"
+            android:label="@string/pen_gestures_title"
+            android:process=":settings"
+            android:theme="@style/Theme.PenGestures" />
+    </application>
 </manifest>

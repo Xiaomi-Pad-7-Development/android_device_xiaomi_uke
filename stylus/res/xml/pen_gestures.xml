@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: 2026 The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:title="@string/pen_gestures_title">
+
+    <ListPreference
+        android:key="pen_gesture_double_tap"
+        android:title="@string/pen_gesture_double_tap"
+        android:entries="@array/pen_gesture_action_entries"
+        android:entryValues="@array/pen_gesture_action_values"
+        app:useSimpleSummaryProvider="true" />
+
+    <ListPreference
+        android:key="pen_gesture_swipe_up"
+        android:title="@string/pen_gesture_swipe_up"
+        android:entries="@array/pen_gesture_action_entries"
+        android:entryValues="@array/pen_gesture_action_values"
+        app:useSimpleSummaryProvider="true" />
+
+    <ListPreference
+        android:key="pen_gesture_swipe_down"
+        android:title="@string/pen_gesture_swipe_down"
+        android:entries="@array/pen_gesture_action_entries"
+        android:entryValues="@array/pen_gesture_action_values"
+        app:useSimpleSummaryProvider="true" />
+
+    <ListPreference
+        android:key="pen_gesture_squeeze"
+        android:title="@string/pen_gesture_squeeze"
+        android:entries="@array/pen_gesture_action_entries"
+        android:entryValues="@array/pen_gesture_action_values"
+        app:useSimpleSummaryProvider="true" />
+
+</PreferenceScreen>

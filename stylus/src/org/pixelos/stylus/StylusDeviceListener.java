@@ -29,13 +29,15 @@ final class StylusDeviceListener implements InputManager.InputDeviceListener {
     private final InputManager mInputManager;
     private final BluetoothAdapter mAdapter;
     private final PenMipp mMipp;
+    private final PenPosition mPosition;
     private final PenReports mReports = new PenReports();
     private final Handler mHandler = new Handler(Looper.getMainLooper());
 
     // input device id -> pen version
     private final SparseIntArray mPens = new SparseIntArray();
 
-    StylusDeviceListener(Context context) {
+    StylusDeviceListener(Context context, PenPosition position) {
+        mPosition = position;
         mInputManager = context.getSystemService(InputManager.class);
         mAdapter = context.getSystemService(BluetoothManager.class).getAdapter();
         mMipp = new PenMipp(context);
@@ -64,6 +66,7 @@ final class StylusDeviceListener implements InputManager.InputDeviceListener {
 
         keepEnabled(device);
         mPens.put(deviceId, version);
+        mPosition.start();
         Log.i(TAG, "Pen " + device.getName() + " connected, version " + version);
         TouchFeature.setModeValue(TouchFeature.MODE_PEN_CONNECTION, version | PEN_CONNECTED);
 
@@ -92,6 +95,7 @@ final class StylusDeviceListener implements InputManager.InputDeviceListener {
         TouchFeature.setModeValue(TouchFeature.MODE_PEN_CONNECTION, version);
 
         if (mPens.size() == 0) {
+            mPosition.stop();
             mMipp.disconnect();
             mReports.stop();
         }

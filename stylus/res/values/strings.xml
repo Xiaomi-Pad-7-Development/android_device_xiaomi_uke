@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: 2026 The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="stylus_title">Stylus</string>
+    <string name="stylus_summary">Gestures and the stylus panel</string>
+    <string name="stylus_status_title">Status</string>
+    <string name="stylus_battery_title">Battery</string>
+    <string name="stylus_not_connected">Stylus not connected</string>
+    <string name="stylus_battery_unavailable">Battery level not reported</string>
+    <string name="stylus_battery_level"><xliff:g id="percent" example="80">%1$d</xliff:g>%%</string>
+    <string name="stylus_battery_charging"><xliff:g id="percent" example="80">%1$d</xliff:g>%% · Charging</string>
+    <string name="stylus_battery_full"><xliff:g id="percent" example="100">%1$d</xliff:g>%% · Fully charged</string>
+    <string name="pen_gestures_title">Stylus gestures</string>
+    <string name="pen_gestures_summary">Double tap, swipe and squeeze actions</string>
+
+    <string name="pen_gesture_double_tap">Double tap</string>
+    <string name="pen_gesture_swipe_up">Swipe up</string>
+    <string name="pen_gesture_swipe_down">Swipe down</string>
+    <string name="pen_gesture_squeeze">Squeeze</string>
+
+    <string name="pen_gesture_action_none">Do nothing</string>
+    <string name="pen_gesture_action_panel">Show stylus panel</string>
+    <string name="pen_gesture_action_assistant">Open assistant</string>
+    <string name="pen_gesture_action_voice_search">Voice search</string>
+    <string name="pen_gesture_action_camera">Open camera</string>
+    <string name="pen_gesture_action_take_picture">Take picture</string>
+    <string name="pen_gesture_action_flashlight">Toggle flashlight</string>
+    <string name="pen_gesture_action_last_app">Switch to last app</string>
+    <string name="pen_gesture_action_recents">Recent apps</string>
+    <string name="pen_gesture_action_screenshot">Screenshot</string>
+    <string name="pen_gesture_action_partial_screenshot">Partial screenshot</string>
+    <string name="pen_gesture_action_play_pause">Play / pause</string>
+    <string name="pen_gesture_action_volume_up">Volume up</string>
+    <string name="pen_gesture_action_volume_down">Volume down</string>
+    <string name="pen_gesture_action_screen_off">Turn screen off</string>
+    <string name="pen_gesture_action_page_up">Page up</string>
+    <string name="pen_gesture_action_page_down">Page down</string>
+
+    <string name="pen_panel_title">Stylus panel</string>
+    <string name="pen_panel_actions_title">Panel actions</string>
+    <string name="pen_panel_actions_summary">Actions shown around the stylus when the panel opens</string>
+</resources>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: 2026 The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/stylus_title">
+
+    <PreferenceCategory
+        android:title="@string/stylus_status_title">
+
+        <Preference
+            android:key="stylus_battery"
+            android:title="@string/stylus_battery_title"
+            android:summary="@string/stylus_not_connected"
+            android:selectable="false" />
+
+    </PreferenceCategory>
+
+    <Preference
+        android:key="pen_gestures"
+        android:title="@string/pen_gestures_title"
+        android:summary="@string/pen_gestures_summary">
+        <intent
+            android:targetPackage="org.pixelos.stylus"
+            android:targetClass="org.pixelos.stylus.GestureSettingsActivity" />
+    </Preference>
+
+    <PreferenceCategory
+        android:title="@string/pen_panel_title">
+
+        <MultiSelectListPreference
+            android:key="pen_panel_actions"
+            android:title="@string/pen_panel_actions_title"
+            android:summary="@string/pen_panel_actions_summary"
+            android:entries="@array/pen_panel_action_entries"
+            android:entryValues="@array/pen_panel_action_values" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

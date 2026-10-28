@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: 2026 The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string-array name="pen_gesture_action_entries" translatable="false">
+        <item>@string/pen_gesture_action_none</item>
+        <item>@string/pen_gesture_action_panel</item>
+        <item>@string/pen_gesture_action_assistant</item>
+        <item>@string/pen_gesture_action_voice_search</item>
+        <item>@string/pen_gesture_action_camera</item>
+        <item>@string/pen_gesture_action_take_picture</item>
+        <item>@string/pen_gesture_action_flashlight</item>
+        <item>@string/pen_gesture_action_last_app</item>
+        <item>@string/pen_gesture_action_recents</item>
+        <item>@string/pen_gesture_action_screenshot</item>
+        <item>@string/pen_gesture_action_partial_screenshot</item>
+        <item>@string/pen_gesture_action_play_pause</item>
+        <item>@string/pen_gesture_action_volume_up</item>
+        <item>@string/pen_gesture_action_volume_down</item>
+        <item>@string/pen_gesture_action_screen_off</item>
+        <item>@string/pen_gesture_action_page_up</item>
+        <item>@string/pen_gesture_action_page_down</item>
+    </string-array>
+
+    <string-array name="pen_gesture_action_values" translatable="false">
+        <item>none</item>
+        <item>panel</item>
+        <item>assistant</item>
+        <item>voice_search</item>
+        <item>camera</item>
+        <item>take_picture</item>
+        <item>flashlight</item>
+        <item>last_app</item>
+        <item>recents</item>
+        <item>screenshot</item>
+        <item>partial_screenshot</item>
+        <item>play_pause</item>
+        <item>volume_up</item>
+        <item>volume_down</item>
+        <item>screen_off</item>
+        <item>page_up</item>
+        <item>page_down</item>
+    </string-array>
+
+    <string-array name="pen_panel_action_entries" translatable="false">
+        <item>@string/pen_gesture_action_assistant</item>
+        <item>@string/pen_gesture_action_voice_search</item>
+        <item>@string/pen_gesture_action_camera</item>
+        <item>@string/pen_gesture_action_take_picture</item>
+        <item>@string/pen_gesture_action_flashlight</item>
+        <item>@string/pen_gesture_action_last_app</item>
+        <item>@string/pen_gesture_action_recents</item>
+        <item>@string/pen_gesture_action_screenshot</item>
+        <item>@string/pen_gesture_action_partial_screenshot</item>
+        <item>@string/pen_gesture_action_play_pause</item>
+        <item>@string/pen_gesture_action_volume_up</item>
+        <item>@string/pen_gesture_action_volume_down</item>
+        <item>@string/pen_gesture_action_screen_off</item>
+        <item>@string/pen_gesture_action_page_up</item>
+        <item>@string/pen_gesture_action_page_down</item>
+    </string-array>
+
+    <string-array name="pen_panel_action_values" translatable="false">
+        <item>assistant</item>
+        <item>voice_search</item>
+        <item>camera</item>
+        <item>take_picture</item>
+        <item>flashlight</item>
+        <item>last_app</item>
+        <item>recents</item>
+        <item>screenshot</item>
+        <item>partial_screenshot</item>
+        <item>play_pause</item>
+        <item>volume_up</item>
+        <item>volume_down</item>
+        <item>screen_off</item>
+        <item>page_up</item>
+        <item>page_down</item>
+    </string-array>
+</resources>

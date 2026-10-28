@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: 2026 Yet Another AOSP Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- SettingsLib's row ripple reads the AppCompat attribute, which nothing sets here, so
+         RippleDrawable falls back to magenta. -->
+    <style name="Theme.PenGestures" parent="Theme.SubSettingsBase">
+        <item name="android:colorControlHighlight">@color/pen_ripple</item>
+        <item name="colorControlHighlight">@color/pen_ripple</item>
+    </style>
+</resources>
