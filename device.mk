@@ -173,6 +173,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     vendor.lineage.health-service.uke
 
+# Lineage Touch: high touch polling rate, through the Xiaomi touchfeature HAL
+PRODUCT_PACKAGES += \
+    vendor.lineage.touch-service.uke
+
 # Hypsys
 PRODUCT_PACKAGES += \
     xiaomi.system.hypsys.common-service

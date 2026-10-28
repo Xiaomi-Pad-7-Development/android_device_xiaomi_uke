@@ -34,6 +34,8 @@
 # Lineage Health
 /vendor/bin/hw/vendor\.lineage\.health-service\.uke    u:object_r:hal_lineage_health_default_exec:s0
 
+/vendor/bin/hw/vendor\.lineage\.touch-service\.uke    u:object_r:hal_lineage_touch_default_exec:s0
+
 # Throttling curve
 /vendor/bin/ax_thermal_curve\.sh    u:object_r:ax_thermal_curve_exec:s0
 

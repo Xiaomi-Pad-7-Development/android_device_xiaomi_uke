@@ -1,0 +1,4 @@
+allow hal_lineage_touch_default hal_touchfeature_xiaomi_service:service_manager find;
+allow hal_lineage_touch_default hal_touchfeature_xiaomi_server:binder { call transfer };
+allow hal_touchfeature_xiaomi_server hal_lineage_touch_default:binder transfer;
+allow hal_touchfeature_xiaomi_server hal_lineage_touch_default:fd use;
