@@ -1,0 +1,22 @@
+//
+// SPDX-FileCopyrightText: 2026 The LineageOS Project
+// SPDX-License-Identifier: Apache-2.0
+//
+
+cc_binary {
+    name: "vendor.lineage.touch-service.uke",
+    init_rc: ["vendor.lineage.touch-service.uke.rc"],
+    vintf_fragments: ["vendor.lineage.touch-service.uke.xml"],
+    relative_install_path: "hw",
+    vendor: true,
+    srcs: [
+        "HighTouchPollingRate.cpp",
+        "service.cpp",
+    ],
+    shared_libs: [
+        "libbase",
+        "libbinder_ndk",
+        "vendor.lineage.touch-V1-ndk",
+        "vendor.xiaomi.hw.touchfeature-V1-ndk",
+    ],
+}
