@@ -531,4 +531,9 @@
          Otherwise, the device may fail to wake out of suspend reliably.
          The default is false. -->
     <bool name="config_suspendWhenScreenOffDueToProximity">true</bool>
+
+    <!-- Xiaomi Mi Turbo Charge. The node reports 3 for chargers between 30W and 50W -->
+    <bool name="config_hasTurboPowerCharger">true</bool>
+    <string name="config_oemFastChargerStatusPath" translatable="false">/sys/class/qcom-battery/quick_charge_type</string>
+    <string name="config_oemFastChargerStatusValue" translatable="false">3</string>
 </resources>
