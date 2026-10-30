@@ -35,7 +35,9 @@
             android:title="@string/pen_panel_actions_title"
             android:summary="@string/pen_panel_actions_summary"
             android:entries="@array/pen_panel_action_entries"
-            android:entryValues="@array/pen_panel_action_values" />
+            android:entryValues="@array/pen_panel_action_values"
+            android:positiveButtonText="@android:string/ok"
+            android:negativeButtonText="@android:string/cancel" />
 
     </PreferenceCategory>
 
