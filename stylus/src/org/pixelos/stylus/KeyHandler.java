@@ -18,18 +18,21 @@ import com.android.internal.os.DeviceKeyHandler;
 
 /*
  * Loaded into system_server through config_deviceKeyHandlerLibs. Swallows
- * the Focus Pen Pro gesture keys and runs the action set for each one.
+ * the Focus Pen Pro gesture keys and runs the action set for each one, except
+ * in a notes app, which gets the keys itself.
  */
 public final class KeyHandler implements DeviceKeyHandler {
 
     private final Context mContext;
     private final ContentResolver mResolver;
     private final ActionRunner mRunner;
+    private final NotesApps mNotesApps;
 
     public KeyHandler(Context context) {
         mContext = context;
         mResolver = context.getContentResolver();
         mRunner = new ActionRunner(context);
+        mNotesApps = new NotesApps(context);
 
         context.registerReceiver(new BroadcastReceiver() {
             @Override
@@ -45,7 +48,7 @@ public final class KeyHandler implements DeviceKeyHandler {
     @Override
     public KeyEvent handleKeyEvent(KeyEvent event) {
         final String gesture = PenGestures.gestureFor(event.getScanCode());
-        if (gesture == null || !isPen(event.getDevice())) {
+        if (gesture == null || !isPen(event.getDevice()) || mNotesApps.isInFront()) {
             return event;
         }
         if (event.getAction() == KeyEvent.ACTION_DOWN && event.getRepeatCount() == 0) {
