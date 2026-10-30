@@ -9,6 +9,9 @@ import android.app.ActivityTaskManager;
 import android.app.role.RoleManager;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.os.UserHandle;
 import android.util.ArraySet;
 import android.util.Log;
@@ -61,9 +64,17 @@ final class NotesApps {
         if (mRoles == null) {
             return false;
         }
+        final int user = android.app.ActivityManager.getCurrentUser();
         final List<String> holders = mRoles.getRoleHoldersAsUser(RoleManager.ROLE_NOTES,
-                UserHandle.of(android.app.ActivityManager.getCurrentUser()));
-        return holders.contains(pkg);
+                UserHandle.of(user));
+        return holders.contains(pkg) || handlesCreateNote(pkg, user);
+    }
+
+    private boolean handlesCreateNote(String pkg, int user) {
+        final List<ResolveInfo> infos = mContext.getPackageManager().queryIntentActivitiesAsUser(
+                new Intent(Intent.ACTION_CREATE_NOTE).setPackage(pkg),
+                PackageManager.ResolveInfoFlags.of(PackageManager.MATCH_ALL), UserHandle.of(user));
+        return !infos.isEmpty();
     }
 
     private static String frontPackage() {
