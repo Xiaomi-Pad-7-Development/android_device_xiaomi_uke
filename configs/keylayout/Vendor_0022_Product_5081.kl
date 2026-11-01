@@ -1,7 +1,8 @@
 # key 78    NUMPAD_ADD
 
-# Gestures
-key 96    STYLUS_BUTTON_TAIL
-key 73    PAGE_UP
-key 81    PAGE_DOWN
-key 189   SYSRQ
+# Gestures, one button each so the system acts on none of them (the stock codes were SYSRQ,
+# STYLUS_BUTTON_TAIL, PAGE_UP and PAGE_DOWN) and a notes app gets them as they are
+key 189   BUTTON_7
+key 96    BUTTON_8
+key 73    BUTTON_9
+key 81    BUTTON_10
