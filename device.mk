@@ -229,6 +229,16 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(DEVICE_PATH)/configs/keylayout/uinput-xiaomi.kl:$(TARGET_COPY_OUT_ODM)/usr/keylayout/uinput-xiaomi.kl
 
+# Touchscreen wake, pen digitizer and keyboard input configuration
+PRODUCT_COPY_FILES += \
+    $(DEVICE_PATH)/configs/keylayout/NVTCapacitiveTouchScreen.kl:$(TARGET_COPY_OUT_ODM)/usr/keylayout/NVTCapacitiveTouchScreen.kl \
+    $(DEVICE_PATH)/configs/idc/NVTCapacitiveTouchScreen.idc:$(TARGET_COPY_OUT_ODM)/usr/idc/NVTCapacitiveTouchScreen.idc \
+    $(DEVICE_PATH)/configs/idc/NVTCapacitivePenM80p.idc:$(TARGET_COPY_OUT_ODM)/usr/idc/NVTCapacitivePenM80p.idc \
+    $(DEVICE_PATH)/configs/idc/NVTCapacitivePenM80p-merged.idc:$(TARGET_COPY_OUT_ODM)/usr/idc/NVTCapacitivePenM80p-merged.idc \
+    $(DEVICE_PATH)/configs/idc/NVTCapacitivePenP81c.idc:$(TARGET_COPY_OUT_ODM)/usr/idc/NVTCapacitivePenP81c.idc \
+    $(DEVICE_PATH)/configs/idc/NVTCapacitivePenP81c-merged.idc:$(TARGET_COPY_OUT_ODM)/usr/idc/NVTCapacitivePenP81c-merged.idc \
+    $(DEVICE_PATH)/configs/idc/Vendor_15d9_Product_00a3.idc:$(TARGET_COPY_OUT_ODM)/usr/idc/Vendor_15d9_Product_00a3.idc
+
 # Kernel Manager
 PRODUCT_COPY_FILES += \
     $(DEVICE_PATH)/configs/ax_kernel_manager.xml:$(TARGET_COPY_OUT_VENDOR)/etc/ax_kernel_manager.xml
