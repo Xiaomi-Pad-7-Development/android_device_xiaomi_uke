@@ -1,0 +1,17 @@
+//
+// SPDX-FileCopyrightText: 2026 The LineageOS Project
+// SPDX-License-Identifier: Apache-2.0
+//
+
+// The stock TouchService with the MIUI stand-in classes added, see build-touchservice.sh. It keeps
+// the system uid it declares, so it is signed with the platform key.
+android_app_import {
+    name: "XiaomiTouchService",
+    apk: "TouchService.apk",
+    certificate: "platform",
+    privileged: true,
+    system_ext_specific: true,
+    dex_preopt: {
+        enabled: false,
+    },
+}
