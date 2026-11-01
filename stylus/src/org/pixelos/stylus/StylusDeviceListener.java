@@ -31,6 +31,7 @@ final class StylusDeviceListener implements InputManager.InputDeviceListener {
     private final PenMipp mMipp;
     private final PenPosition mPosition;
     private final PenReports mReports = new PenReports();
+    private final PenGestureAction mGestureAction;
     private final Handler mHandler = new Handler(Looper.getMainLooper());
 
     // input device id -> pen version
@@ -41,6 +42,13 @@ final class StylusDeviceListener implements InputManager.InputDeviceListener {
         mInputManager = context.getSystemService(InputManager.class);
         mAdapter = context.getSystemService(BluetoothManager.class).getAdapter();
         mMipp = new PenMipp(context);
+        mGestureAction = new PenGestureAction(context);
+
+        // Gesture feedback and actions, the job HyperOS did in system_server.
+        // A double press buzzes the pen; a pinch runs the action selected by
+        // persist.pen.pinch_action instead of relying on the app.
+        mReports.setOnDoublePress(mMipp::sendGestureHaptic);
+        mReports.setOnPinch(mGestureAction::onPinch);
     }
 
     void start() {
