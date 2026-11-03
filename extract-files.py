@@ -4,6 +4,9 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
+import subprocess
+from os import path
+
 from extract_utils.file import File
 from extract_utils.fixups_blob import (
     BlobFixupCtx,
@@ -29,6 +32,15 @@ namespace_imports = [
     'vendor/qcom/opensource/commonsys-intf/display',
     'vendor/qcom/opensource/dataservices',
 ]
+
+def fixup_touchservice(ctx: BlobFixupCtx, file: File, file_path: str, *args, **kwargs):
+    # Add the MIUI stand-in classes the stock TouchService expects
+    script = path.join(
+        path.dirname(path.abspath(__file__)),
+        'prebuilts/xiaomi-touchservice/build-touchservice.sh',
+    )
+    subprocess.run([script, file_path, file_path], check=True)
+
 
 def lib_fixup_vendor_suffix(lib: str, partition: str, *args, **kwargs):
     return f'{lib}_{partition}' if partition == 'vendor' else None
@@ -204,6 +216,8 @@ blob_fixups: blob_fixups_user_type = {
         .add_needed('libinput_shim.so'),
     'system_ext/lib64/vendor.qti.hardware.qccsyshal@1.2-halimpl.so': blob_fixup()
         .replace_needed('libprotobuf-cpp-full.so', 'libprotobuf-cpp-full-21.7.so'),
+    'system_ext/priv-app/TouchService/TouchService.apk': blob_fixup()
+        .call(fixup_touchservice, need_tmp_dir=False),
     'vendor/lib64/c2.dolby.client.so': blob_fixup()
         .add_needed('dolbycodec_shim.so'),
     'vendor/lib64/com.qti.feature2.anchorsync.so': blob_fixup()

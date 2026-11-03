@@ -377,14 +377,6 @@ PRODUCT_SOONG_NAMESPACES += \
 PRODUCT_PACKAGES += \
     XiaomiStylus
 
-# Xiaomi PencilEngine from the stock ROM: the framework jar and the TouchService that binds it.
-# Pen apps such as StarNote ask the service for the squeeze and swipe gestures
-PRODUCT_PACKAGES += \
-    XiaomiTouchService
-
-PRODUCT_COPY_FILES += \
-    $(DEVICE_PATH)/prebuilts/xiaomi-pencilengine/xiaomi-pencilengine-pad.jar:$(TARGET_COPY_OUT_SYSTEM_EXT)/framework/xiaomi-pencilengine-pad.jar
-
 # Thermal
 PRODUCT_PACKAGES += \
     android.hardware.thermal-service.qti
