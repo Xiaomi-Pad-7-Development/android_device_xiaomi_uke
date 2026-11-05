@@ -67,7 +67,7 @@ final class StylusDeviceListener implements InputManager.InputDeviceListener {
             return;
         }
 
-        int version = getPenVersion(device.getVendorId(), device.getProductId());
+        int version = PenGestures.getPenVersion(device.getVendorId(), device.getProductId());
         if (version == 0) {
             return;
         }
@@ -133,34 +133,5 @@ final class StylusDeviceListener implements InputManager.InputDeviceListener {
         }
         Log.i(TAG, "Re-enabling pen input device " + device.getName());
         mInputManager.enableInputDevice(device.getId());
-    }
-
-    private static int getPenVersion(int vendorId, int productId) {
-        if (vendorId == 0x1915) {
-            switch (productId) {
-                case 0xeaea:
-                    return 1;
-                case 0x4d81:
-                    return 2;
-            }
-        } else if (vendorId == 0x0022) {
-            switch (productId) {
-                case 0x3280:
-                case 0x3281:
-                case 0x4d80:
-                    return 3;
-                case 0x4e83:
-                    return 4;
-                case 0x3183:
-                    return 5;
-                case 0x3283:
-                    return 6;
-                case 0x4f84:
-                    return 7;
-                case 0x5081:
-                    return 8;
-            }
-        }
-        return 0;
     }
 }

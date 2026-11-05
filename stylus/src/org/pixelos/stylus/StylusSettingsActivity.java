@@ -63,8 +63,7 @@ public class StylusSettingsActivity extends CollapsingToolbarBaseActivity {
         private int findStylus() {
             for (int id : mInputManager.getInputDeviceIds()) {
                 InputDevice device = mInputManager.getInputDevice(id);
-                if (device != null && device.getVendorId() == PenGestures.VENDOR_ID
-                        && device.getProductId() == PenGestures.PRODUCT_ID) {
+                if (PenGestures.isPen(device)) {
                     return id;
                 }
             }

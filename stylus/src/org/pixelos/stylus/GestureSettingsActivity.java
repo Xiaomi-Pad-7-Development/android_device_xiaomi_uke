@@ -5,7 +5,9 @@
 
 package org.pixelos.stylus;
 
+import android.hardware.input.InputManager;
 import android.os.Bundle;
+import android.view.InputDevice;
 
 import androidx.preference.PreferenceFragmentCompat;
 
@@ -32,6 +34,29 @@ public class GestureSettingsActivity extends CollapsingToolbarBaseActivity {
             getPreferenceManager().setPreferenceDataStore(
                     new PenDataStore(requireContext().getContentResolver()));
             setPreferencesFromResource(R.xml.pen_gestures, rootKey);
+
+            if (!hasDoubleTap()) {
+                getPreferenceScreen().removePreference(
+                        findPreference(PenGestures.DOUBLE_TAP));
+            }
+        }
+
+        // Shown unless the pens that are connected all lack a double tap
+        private boolean hasDoubleTap() {
+            final InputManager inputManager = requireContext().getSystemService(InputManager.class);
+            boolean penConnected = false;
+            for (int id : inputManager.getInputDeviceIds()) {
+                final InputDevice device = inputManager.getInputDevice(id);
+                if (!PenGestures.isPen(device)) {
+                    continue;
+                }
+                penConnected = true;
+                if (PenGestures.getPenVersion(device.getVendorId(), device.getProductId())
+                        == PenGestures.PEN_VERSION_PRO) {
+                    return true;
+                }
+            }
+            return !penConnected;
         }
     }
 }

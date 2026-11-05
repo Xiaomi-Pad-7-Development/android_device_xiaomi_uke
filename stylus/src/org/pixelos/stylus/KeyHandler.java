@@ -11,14 +11,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.UserHandle;
-import android.view.InputDevice;
 import android.view.KeyEvent;
 
 import com.android.internal.os.DeviceKeyHandler;
 
 /*
  * Loaded into system_server through config_deviceKeyHandlerLibs. Swallows
- * the Focus Pen Pro gesture keys and runs the action set for each one, except
+ * the Xiaomi pen gesture keys and runs the action set for each one, except
  * in a notes app, which gets the keys itself.
  */
 public final class KeyHandler implements DeviceKeyHandler {
@@ -48,7 +47,8 @@ public final class KeyHandler implements DeviceKeyHandler {
     @Override
     public KeyEvent handleKeyEvent(KeyEvent event) {
         final String gesture = PenGestures.gestureFor(event.getScanCode());
-        if (gesture == null || !isPen(event.getDevice()) || mNotesApps.isInFront()) {
+        if (gesture == null || !PenGestures.isPen(event.getDevice())
+                || mNotesApps.isInFront()) {
             return event;
         }
         if (event.getAction() == KeyEvent.ACTION_DOWN && event.getRepeatCount() == 0) {
@@ -63,10 +63,5 @@ public final class KeyHandler implements DeviceKeyHandler {
             }
         }
         return null;
-    }
-
-    private static boolean isPen(InputDevice device) {
-        return device != null && device.getVendorId() == PenGestures.VENDOR_ID
-                && device.getProductId() == PenGestures.PRODUCT_ID;
     }
 }

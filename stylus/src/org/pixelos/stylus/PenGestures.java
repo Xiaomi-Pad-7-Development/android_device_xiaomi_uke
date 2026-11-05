@@ -7,6 +7,7 @@ package org.pixelos.stylus;
 
 import android.content.ContentResolver;
 import android.os.UserHandle;
+import android.view.InputDevice;
 import android.provider.Settings;
 
 import java.util.ArrayList;
@@ -15,15 +16,15 @@ import java.util.Collection;
 import java.util.List;
 
 /*
- * The Focus Pen Pro reports its gestures as keys on its keyboard node.
+ * The Xiaomi pens report their gestures as keys on their keyboard node.
  * Each gesture runs the action picked for it in the pen gesture settings.
  */
 final class PenGestures {
 
     static final String PACKAGE = "org.pixelos.stylus";
 
-    static final int VENDOR_ID = 0x0022;
-    static final int PRODUCT_ID = 0x5081;
+    // The Focus Pen Pro is the only pen with a double tap
+    static final int PEN_VERSION_PRO = 8;
 
     static final String DOUBLE_TAP = "pen_gesture_double_tap";
     static final String SWIPE_UP = "pen_gesture_swipe_up";
@@ -63,14 +64,50 @@ final class PenGestures {
 
     private PenGestures() {}
 
+    /** Returns the pen generation for a vendor and product id, or 0 if it is not a pen. */
+    static int getPenVersion(int vendorId, int productId) {
+        if (vendorId == 0x1915) {
+            switch (productId) {
+                case 0xeaea:
+                    return 1;
+                case 0x4d81:
+                    return 2;
+            }
+        } else if (vendorId == 0x0022) {
+            switch (productId) {
+                case 0x3280:
+                case 0x3281:
+                case 0x4d80:
+                    return 3;
+                case 0x4e83:
+                    return 4;
+                case 0x3183:
+                    return 5;
+                case 0x3283:
+                    return 6;
+                case 0x4f84:
+                    return 7;
+                case 0x5081:
+                    return PEN_VERSION_PRO;
+            }
+        }
+        return 0;
+    }
+
+    static boolean isPen(InputDevice device) {
+        return device != null && getPenVersion(device.getVendorId(), device.getProductId()) != 0;
+    }
+
     /** Returns the gesture setting for a pen scan code, or null if it is not a gesture. */
     static String gestureFor(int scanCode) {
         switch (scanCode) {
             case 96: // KEY_KPENTER
                 return DOUBLE_TAP;
             case 73: // KEY_KP9
+            case 104: // KEY_PAGEUP, sent by the POCO Focus Pen
                 return SWIPE_UP;
             case 81: // KEY_KP3
+            case 109: // KEY_PAGEDOWN, sent by the POCO Focus Pen
                 return SWIPE_DOWN;
             case 189: // KEY_F19
                 return SQUEEZE;
