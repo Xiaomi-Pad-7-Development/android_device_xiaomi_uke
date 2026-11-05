@@ -189,3 +189,6 @@ ro.vendor.audio.support.voiprx.441khz=true
 vendor.audio.dolby.control.support=true
 vendor.audio.useXiaomiSpatializer=true
 vendor.audio.wps.resume=false
+
+# Model per SKU: ukepgl is the POCO Pad X1, ukein the Indian Pad 7
+import /odm/etc/${ro.boot.product.hardware.sku}_model.prop

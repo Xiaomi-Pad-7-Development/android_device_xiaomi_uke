@@ -1,0 +1,6 @@
+# Xiaomi Pad 7 (India): report its own model. Only the identity is taken from
+# stock, not its build fingerprints, so Play does not treat this as a stock build.
+ro.product.odm.model=2410CRP4CI
+ro.product.odm.marketname=Xiaomi Pad 7
+ro.product.odm.cert=2410CRP4CI
+ro.product.model_for_attestation=2410CRP4CI
