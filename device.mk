@@ -225,6 +225,11 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.consumerir.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.consumerir.xml
 
+# Model per SKU, imported by odm.prop
+PRODUCT_COPY_FILES += \
+    $(DEVICE_PATH)/configs/odm/ukein_model.prop:$(TARGET_COPY_OUT_ODM)/etc/ukein_model.prop \
+    $(DEVICE_PATH)/configs/odm/ukepgl_model.prop:$(TARGET_COPY_OUT_ODM)/etc/ukepgl_model.prop
+
 # Keylayout
 PRODUCT_COPY_FILES += \
     $(DEVICE_PATH)/configs/keylayout/uinput-xiaomi.kl:$(TARGET_COPY_OUT_ODM)/usr/keylayout/uinput-xiaomi.kl \

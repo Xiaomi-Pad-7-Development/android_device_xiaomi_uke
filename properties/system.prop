@@ -10,8 +10,7 @@ ro.bluetooth.wipower=false
 # CNE
 persist.vendor.cne.feature=1
 
-# Device
-ro.product.marketname=Xiaomi Pad 7
+# Device, the market name is set by init.uke.rc as it depends on the SKU
 ro.product.mod_device=uke_global
 
 # Disable MTE Async for system server

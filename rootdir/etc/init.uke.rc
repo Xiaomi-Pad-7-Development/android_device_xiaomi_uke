@@ -48,3 +48,10 @@ on property:persist.sys.ax.thermal_curve=0
     stop vendor.ax_thermal_curve
     exec - root system -- /vendor/bin/ax_thermal_curve.sh restore
     start mi_thermald
+
+# Market name per SKU. It is not in system.prop as ro.* properties are write-once
+on early-init && property:ro.boot.product.hardware.sku=ukepgl
+    setprop ro.product.marketname "POCO Pad X1"
+
+on init && property:ro.product.marketname=
+    setprop ro.product.marketname "Xiaomi Pad 7"
