@@ -104,7 +104,8 @@ final class StylusDeviceListener implements InputManager.InputDeviceListener {
         if (vendorId != 0x0022) {
             return false;
         }
-        return productId == 0x4d80 || productId == 0x5081;
+        return productId == 0x3280 || productId == 0x3281 || productId == 0x4d80
+                || productId == 0x5081;
     }
 
     private static int getPenVersion(int vendorId, int productId) {
