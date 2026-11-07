@@ -232,7 +232,15 @@ PRODUCT_COPY_FILES += \
 
 # Keylayout
 PRODUCT_COPY_FILES += \
-    $(DEVICE_PATH)/configs/keylayout/uinput-xiaomi.kl:$(TARGET_COPY_OUT_ODM)/usr/keylayout/uinput-xiaomi.kl
+    $(DEVICE_PATH)/configs/keylayout/uinput-xiaomi.kl:$(TARGET_COPY_OUT_ODM)/usr/keylayout/uinput-xiaomi.kl \
+    $(DEVICE_PATH)/configs/keylayout/Vendor_0022_Product_5081.kl:$(TARGET_COPY_OUT_ODM)/usr/keylayout/Vendor_0022_Product_5081.kl \
+    $(DEVICE_PATH)/configs/idc/Vendor_0022_Product_5081.idc:$(TARGET_COPY_OUT_ODM)/usr/idc/Vendor_0022_Product_5081.idc \
+    $(DEVICE_PATH)/configs/keylayout/Vendor_0022_Product_5081.kcm:$(TARGET_COPY_OUT_ODM)/usr/keychars/Vendor_0022_Product_5081.kcm \
+    $(DEVICE_PATH)/configs/keylayout/Xiaomi_Focus_Pen_Pro.kl:$(TARGET_COPY_OUT_ODM)/usr/keylayout/Xiaomi_Focus_Pen_Pro.kl \
+    $(DEVICE_PATH)/configs/keylayout/Vendor_0022_Product_5080.kl:$(TARGET_COPY_OUT_ODM)/usr/keylayout/Vendor_0022_Product_5080.kl \
+    $(foreach id,3280 3281 4d80 4d81, \
+        $(DEVICE_PATH)/configs/keylayout/Vendor_0022_Product_$(id).kl:$(TARGET_COPY_OUT_ODM)/usr/keylayout/Vendor_0022_Product_$(id).kl \
+        $(DEVICE_PATH)/configs/keylayout/Vendor_0022_Product_$(id).kcm:$(TARGET_COPY_OUT_ODM)/usr/keychars/Vendor_0022_Product_$(id).kcm)
 
 # Touchscreen wake, pen digitizer and keyboard input configuration
 PRODUCT_COPY_FILES += \
