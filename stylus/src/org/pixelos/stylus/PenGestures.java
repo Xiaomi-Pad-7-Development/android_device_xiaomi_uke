@@ -49,6 +49,9 @@ final class PenGestures {
     private static final int USAGE_DOUBLE_TAP = 0x58;
     private static final int USAGE_SWIPE_UP = 0x61;
     private static final int USAGE_SWIPE_DOWN = 0x5b;
+    // the POCO Focus Pen swipes with page up and page down instead
+    private static final int USAGE_PAGE_UP = 0x4b;
+    private static final int USAGE_PAGE_DOWN = 0x4e;
 
     static final String SQUEEZE = "squeeze";
     static final String DOUBLE_TAP = "double_tap";
@@ -207,8 +210,10 @@ final class PenGestures {
             case USAGE_DOUBLE_TAP:
                 return DOUBLE_TAP;
             case USAGE_SWIPE_UP:
+            case USAGE_PAGE_UP:
                 return SWIPE_UP;
             case USAGE_SWIPE_DOWN:
+            case USAGE_PAGE_DOWN:
                 return SWIPE_DOWN;
             default:
                 return null;
