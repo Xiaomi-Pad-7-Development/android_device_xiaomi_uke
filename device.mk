@@ -5,7 +5,6 @@
 #
 
 DEVICE_PATH := device/xiaomi/uke
-KERNEL_PATH := $(DEVICE_PATH)-kernel
 
 # Add common definitions for Qualcomm
 $(call inherit-product, hardware/qcom-caf/common/common.mk)

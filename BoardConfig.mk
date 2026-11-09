@@ -5,7 +5,6 @@
 #
 
 DEVICE_PATH := device/xiaomi/uke
-KERNEL_PATH := $(DEVICE_PATH)-kernel
 
 BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
 
@@ -56,10 +55,6 @@ TARGET_NO_BOOTLOADER := true
 # Display
 TARGET_SCREEN_DENSITY := 345
 
-# DTB / DTBO
-BOARD_PREBUILT_DTBIMAGE_DIR := $(KERNEL_PATH)/dtbs/
-BOARD_PREBUILT_DTBOIMAGE := $(KERNEL_PATH)/dtbo.img
-
 # Filesystem
 TARGET_FS_CONFIG_GEN := $(DEVICE_PATH)/configs/config.fs
 
@@ -82,7 +77,28 @@ BOARD_BOOTCONFIG := \
     androidboot.load_modules_parallel=true \
     androidboot.memcg=1 \
     androidboot.vendor.qspa=true \
-    androidboot.usbcontroller=a600000.dwc3
+    androidboot.usbcontroller=a600000.dwc3 \
+    androidboot.hypervisor.protected_vm.supported=false \
+    log_buf_len=256K \
+    swiotlb=noforce \
+    loop.max_part=7 \
+    pcie_ports=compat \
+    irqaffinity=0-2 \
+    sysctl.kernel.sched_pelt_multiplier=4 \
+    cpufreq.default_governor=performance \
+    kasan=off \
+    cgroup.memory=nokmem,nosocket \
+    disable_dma32=on \
+    kernel.panic_on_rcu_stall=1 \
+    fw_devlink.strict=1 \
+    service_locator.enable=1 \
+    rcupdate.rcu_expedited=1 \
+    rcu_nocbs=0-7 \
+    no-steal-acc \
+    printk.console_no_auto_verbose=0 \
+    can.stats_timer=0 \
+    video=vfb:640x400,bpp=32,memsize=3072000 \
+    firmware_class.path=/vendor/firmware_mnt/image,/vendor/firmware_mnt/image/kiwi,/vendor/vm-system/oemvm/boot,/vendor/vm-system/trustedvm/boot,/vendor/firmware,/vendor/firmware/wlan/qca_cld/kiwi_v2
 
 BOARD_INCLUDE_DTB_IN_BOOTIMG := true
 BOARD_RAMDISK_USE_LZ4 := true
@@ -95,23 +111,77 @@ BOARD_MKBOOTIMG_INIT_ARGS += --header_version $(BOARD_INIT_BOOT_HEADER_VERSION)
 BOARD_KERNEL_IMAGE_NAME := Image
 BOARD_USES_GENERIC_KERNEL_IMAGE := true
 
-TARGET_NO_KERNEL_OVERRIDE := true
-LOCAL_KERNEL := $(KERNEL_PATH)/kernel
-PRODUCT_COPY_FILES += \
-	$(LOCAL_KERNEL):kernel
+TARGET_KERNEL_VERSION := 6.1
+TARGET_KERNEL_SOURCE := kernel/xiaomi/sm8635
+TARGET_KERNEL_CONFIG := \
+    gki_defconfig \
+    vendor/pineapple_GKI.config
+TARGET_KERNEL_CONFIG_EXT := \
+    $(DEVICE_PATH)/configs/kernel/uke_GKI.config \
+    $(DEVICE_PATH)/configs/kernel/uke_consolidate.config \
+    $(DEVICE_PATH)/configs/kernel/uke_recovered.config
+TARGET_KERNEL_CLANG_COMPILE := true
+# Do not pass TARGET_PRODUCT here: the audio Kbuilds gate per-device config
+# with $(word 2,$(subst _, ,$(TARGET_PRODUCT))) and a bare "uke" has no second
+# token, which silently compiles out -DCONFIG_TARGET_PRODUCT_UKE (no speaker
+# dailink, audio falls back to msm-stub-codec).
+TARGET_KERNEL_ADDITIONAL_FLAGS := LLVM=1 LLVM_IAS=1
+
+TARGET_NEEDS_DTBOIMAGE := true
+BOARD_USES_QCOM_MERGE_DTBS_SCRIPT := true
+# Only merge the Cliffs board DTBs into vendor_boot; merging every DTB in the
+# kernel tree overflows the 96 MiB vendor_boot partition.
+TARGET_MERGE_DTBS_WILDCARD := cliffs*
+TARGET_MERGE_DTBOS_WILDCARD := uke-*
+
+TARGET_KERNEL_EXT_MODULE_ROOT := kernel/xiaomi/sm8635-modules
+TARGET_KERNEL_EXT_MODULES := \
+    qcom/opensource/mmrm-driver \
+    qcom/opensource/mm-drivers/hw_fence \
+    qcom/opensource/mm-drivers/msm_ext_display \
+    qcom/opensource/mm-drivers/sync_fence \
+    qcom/opensource/synx-kernel \
+    qcom/opensource/securemsm-kernel \
+    qcom/opensource/display-drivers/msm \
+    qcom/opensource/graphics-kernel \
+    qcom/opensource/video-driver \
+    qcom/opensource/dsp-kernel \
+    qcom/opensource/eva-kernel \
+    qcom/opensource/camera-kernel \
+    qcom/opensource/spu-kernel \
+    qcom/opensource/audio-kernel \
+    qcom/opensource/mm-sys-kernel/ubwcp \
+    qcom/opensource/datarmnet-ext/mem \
+    qcom/opensource/dataipa/drivers/platform/msm \
+    qcom/opensource/datarmnet/core \
+    qcom/opensource/datarmnet-ext/sch \
+    qcom/opensource/datarmnet-ext/wlan \
+    qcom/opensource/datarmnet-ext/shs \
+    qcom/opensource/datarmnet-ext/perf \
+    qcom/opensource/datarmnet-ext/perf_tether \
+    qcom/opensource/datarmnet-ext/offload \
+    qcom/opensource/datarmnet-ext/aps \
+    qcom/opensource/wlan/platform \
+    qcom/opensource/wlan/qca6750 \
+    qcom/opensource/bt-kernel \
+    qcom/opensource/touch-drivers \
+    nxp/opensource/driver
 
 # Kernel modules
-DLKM_MODULES_PATH := $(KERNEL_PATH)/modules/vendor
-RAMDISK_MODULES_PATH := $(KERNEL_PATH)/modules/ramdisk
+first_stage_modules := $(strip $(shell cat $(TARGET_KERNEL_SOURCE)/modules.list.msm.pineapple $(DEVICE_PATH)/modules/modules.list.first_stage 2>/dev/null))
+second_stage_modules := $(strip $(shell cat $(DEVICE_PATH)/modules/modules.list.second_stage))
+vendor_dlkm_modules := $(strip $(shell cat $(DEVICE_PATH)/modules/modules.list.vendor_dlkm))
+system_dlkm_modules := $(strip $(shell sed 's/#.*$$//;/^$$/d;s|.*/||' $(DEVICE_PATH)/modules/modules.list.system_dlkm))
 
-BOARD_VENDOR_KERNEL_MODULES := $(wildcard $(DLKM_MODULES_PATH)/*.ko)
-BOARD_VENDOR_KERNEL_MODULES_LOAD := $(patsubst %,$(DLKM_MODULES_PATH)/%,$(shell cat $(DLKM_MODULES_PATH)/modules.load))
-BOARD_VENDOR_KERNEL_MODULES_BLOCKLIST_FILE := $(DLKM_MODULES_PATH)/modules.blocklist
+BOARD_SYSTEM_KERNEL_MODULES_LOAD := $(system_dlkm_modules)
+BOARD_VENDOR_RAMDISK_KERNEL_MODULES_LOAD := $(first_stage_modules)
+BOARD_VENDOR_RAMDISK_RECOVERY_KERNEL_MODULES_LOAD := $(first_stage_modules) $(second_stage_modules)
+BOARD_VENDOR_KERNEL_MODULES_BLOCKLIST_FILE := $(TARGET_KERNEL_SOURCE)/modules.vendor_blocklist.msm.pineapple
+BOARD_VENDOR_RAMDISK_KERNEL_MODULES_BLOCKLIST_FILE := $(BOARD_VENDOR_KERNEL_MODULES_BLOCKLIST_FILE)
+BOARD_VENDOR_KERNEL_MODULES_LOAD := $(second_stage_modules) $(vendor_dlkm_modules)
 
-BOARD_VENDOR_RAMDISK_KERNEL_MODULES := $(wildcard $(RAMDISK_MODULES_PATH)/*.ko)
-BOARD_VENDOR_RAMDISK_KERNEL_MODULES_LOAD := $(patsubst %,$(RAMDISK_MODULES_PATH)/%,$(shell cat $(RAMDISK_MODULES_PATH)/modules.load))
-BOARD_VENDOR_RAMDISK_RECOVERY_KERNEL_MODULES_LOAD  := $(patsubst %,$(RAMDISK_MODULES_PATH)/%,$(shell cat $(RAMDISK_MODULES_PATH)/modules.load.recovery))
-BOARD_VENDOR_RAMDISK_KERNEL_MODULES_BLOCKLIST_FILE := $(RAMDISK_MODULES_PATH)/modules.blocklist
+BOOT_KERNEL_MODULES := $(first_stage_modules) $(second_stage_modules)
+SYSTEM_KERNEL_MODULES := $(BOARD_SYSTEM_KERNEL_MODULES_LOAD)
 
 # Partitions
 BOARD_BOOTIMAGE_PARTITION_SIZE := 100663296
@@ -205,8 +275,6 @@ WIFI_HAL_INTERFACE_COMBINATIONS := {{{STA}, 1}, {{AP}, 1}}, {{{STA}, 1}, {{P2P, 
 WIFI_HIDL_UNIFIED_SUPPLICANT_SERVICE_RC_ENTRY := true
 WPA_SUPPLICANT_VERSION := VER_0_8_X
 
-# Workaround to make lineage's soong generator work
-TARGET_KERNEL_SOURCE := $(KERNEL_PATH)/kernel-headers
 WITH_DEXPREOPT_ART_BOOT_IMG_ONLY := true
 
 # Inherit the proprietary files
