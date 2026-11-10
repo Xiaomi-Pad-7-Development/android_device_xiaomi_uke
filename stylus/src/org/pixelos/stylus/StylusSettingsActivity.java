@@ -8,9 +8,12 @@ package org.pixelos.stylus;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.hardware.BatteryState;
+import android.hardware.input.InputManager;
 import android.os.Bundle;
 
 import androidx.preference.ListPreference;
+import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
 import com.android.settingslib.collapsingtoolbar.CollapsingToolbarBaseActivity;
@@ -32,7 +35,13 @@ public class StylusSettingsActivity extends CollapsingToolbarBaseActivity {
         }
     }
 
-    public static class StylusSettingsFragment extends PreferenceFragmentCompat {
+    public static class StylusSettingsFragment extends PreferenceFragmentCompat
+            implements InputManager.InputDeviceListener,
+                    InputManager.InputDeviceBatteryListener {
+
+        private InputManager mInputManager;
+        private Preference mBattery;
+        private int mDeviceId = -1;
 
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
@@ -54,6 +63,94 @@ public class StylusSettingsActivity extends CollapsingToolbarBaseActivity {
             }
             notesApp.setEntries(names);
             notesApp.setEntryValues(packages);
+
+            mBattery = findPreference("stylus_battery");
+            mInputManager = requireContext().getSystemService(InputManager.class);
+        }
+
+        @Override
+        public void onStart() {
+            super.onStart();
+            mInputManager.registerInputDeviceListener(this, null);
+            refresh();
+        }
+
+        @Override
+        public void onStop() {
+            super.onStop();
+            mInputManager.unregisterInputDeviceListener(this);
+            detach();
+        }
+
+        private int findStylus() {
+            for (int id : mInputManager.getInputDeviceIds()) {
+                if (StylusDeviceListener.isPen(mInputManager.getInputDevice(id))) {
+                    return id;
+                }
+            }
+            return -1;
+        }
+
+        private void detach() {
+            if (mDeviceId != -1) {
+                mInputManager.removeInputDeviceBatteryListener(mDeviceId, this);
+                mDeviceId = -1;
+            }
+        }
+
+        private void refresh() {
+            final int id = findStylus();
+            if (id == mDeviceId) {
+                return;
+            }
+            detach();
+            if (id == -1) {
+                mBattery.setSummary(R.string.stylus_not_connected);
+                return;
+            }
+            mDeviceId = id;
+            // Reports the current state as soon as it is registered
+            mInputManager.addInputDeviceBatteryListener(id,
+                    requireContext().getMainExecutor(), this);
+        }
+
+        @Override
+        public void onBatteryStateChanged(int deviceId, long eventTimeMillis,
+                BatteryState state) {
+            if (deviceId != mDeviceId) {
+                return;
+            }
+            if (!state.isPresent() || Float.isNaN(state.getCapacity())) {
+                mBattery.setSummary(R.string.stylus_battery_unavailable);
+                return;
+            }
+
+            final int percent = Math.round(state.getCapacity() * 100);
+            switch (state.getStatus()) {
+                case BatteryState.STATUS_CHARGING:
+                    mBattery.setSummary(getString(R.string.stylus_battery_charging, percent));
+                    break;
+                case BatteryState.STATUS_FULL:
+                    mBattery.setSummary(getString(R.string.stylus_battery_full, percent));
+                    break;
+                default:
+                    mBattery.setSummary(getString(R.string.stylus_battery_level, percent));
+            }
+        }
+
+        @Override
+        public void onInputDeviceAdded(int deviceId) {
+            refresh();
+        }
+
+        @Override
+        public void onInputDeviceRemoved(int deviceId) {
+            refresh();
+        }
+
+        @Override
+        public void onInputDeviceChanged(int deviceId) {
+            refresh();
         }
     }
 }

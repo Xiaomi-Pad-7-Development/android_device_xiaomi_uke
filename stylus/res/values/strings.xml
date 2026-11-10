@@ -3,9 +3,16 @@
      SPDX-FileCopyrightText: 2026 Yet Another AOSP Project
      SPDX-License-Identifier: Apache-2.0
 -->
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="stylus_title">Stylus</string>
     <string name="stylus_summary">Pen gestures and action pie</string>
+    <string name="stylus_status_title">Status</string>
+    <string name="stylus_battery_title">Battery</string>
+    <string name="stylus_not_connected">Stylus not connected</string>
+    <string name="stylus_battery_unavailable">Battery level not reported</string>
+    <string name="stylus_battery_level"><xliff:g id="percent" example="80">%1$d</xliff:g>%%</string>
+    <string name="stylus_battery_charging"><xliff:g id="percent" example="80">%1$d</xliff:g>%% · Charging</string>
+    <string name="stylus_battery_full"><xliff:g id="percent" example="100">%1$d</xliff:g>%% · Fully charged</string>
 
     <string name="gestures_title">Gestures</string>
     <string name="gesture_squeeze">Squeeze</string>

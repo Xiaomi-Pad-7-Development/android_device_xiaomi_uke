@@ -6,6 +6,16 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <PreferenceCategory android:title="@string/stylus_status_title">
+
+        <Preference
+            android:key="stylus_battery"
+            android:title="@string/stylus_battery_title"
+            android:summary="@string/stylus_not_connected"
+            android:selectable="false" />
+
+    </PreferenceCategory>
+
     <PreferenceCategory android:title="@string/gestures_title">
 
         <ListPreference
