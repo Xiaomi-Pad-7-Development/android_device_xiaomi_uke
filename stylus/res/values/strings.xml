@@ -30,4 +30,11 @@
     <string name="action_play_pause">Play or pause</string>
     <string name="action_scroll_up">Scroll up</string>
     <string name="action_scroll_down">Scroll down</string>
+    <string name="action_partial_screenshot">Partial screenshot</string>
+    <string name="action_voice_search">Voice search</string>
+    <string name="action_camera">Camera</string>
+    <string name="action_flashlight">Flashlight</string>
+    <string name="action_last_app">Last app</string>
+    <string name="action_volume_up">Volume up</string>
+    <string name="action_volume_down">Volume down</string>
 </resources>

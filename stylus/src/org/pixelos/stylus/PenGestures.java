@@ -5,10 +5,19 @@
 
 package org.pixelos.stylus;
 
+import android.Manifest;
+import android.app.ActivityManager;
 import android.app.ActivityTaskManager;
+import android.app.IActivityManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.hardware.camera2.CameraAccessException;
+import android.hardware.camera2.CameraCharacteristics;
+import android.hardware.camera2.CameraManager;
 import android.hardware.input.InputManager;
 import android.os.Handler;
 import android.os.Looper;
@@ -23,7 +32,9 @@ import android.view.InputDevice;
 import android.view.KeyCharacterMap;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
+import android.view.WindowManager;
 
+import com.android.internal.util.ScreenshotHelper;
 import com.xiaomi.touchservice.pencilengine.PencilEngineManagerService;
 
 import java.util.ArrayList;
@@ -67,6 +78,16 @@ final class PenGestures {
     static final String ACTION_PLAY_PAUSE = "play_pause";
     static final String ACTION_SCROLL_UP = "scroll_up";
     static final String ACTION_SCROLL_DOWN = "scroll_down";
+    static final String ACTION_PARTIAL_SCREENSHOT = "partial_screenshot";
+    static final String ACTION_VOICE_SEARCH = "voice_search";
+    static final String ACTION_CAMERA = "camera";
+    static final String ACTION_FLASHLIGHT = "flashlight";
+    static final String ACTION_LAST_APP = "last_app";
+    static final String ACTION_VOLUME_UP = "volume_up";
+    static final String ACTION_VOLUME_DOWN = "volume_down";
+
+    private static final String ACTION_SCREEN_CAMERA_GESTURE =
+            "lineageos.intent.action.SCREEN_CAMERA_GESTURE";
 
     // pen haptic types and strength stock uses for a double tap and a swipe
     private static final int HAPTIC_DOUBLE_TAP = 3;
@@ -81,7 +102,9 @@ final class PenGestures {
 
     // every action the pie can show, in the order it shows them
     private static final List<String> PIE_CHOICES = Arrays.asList(ACTION_NOTES,
-            ACTION_SCREENSHOT, ACTION_ASSISTANT, ACTION_RECENTS, ACTION_PLAY_PAUSE);
+            ACTION_SCREENSHOT, ACTION_PARTIAL_SCREENSHOT, ACTION_ASSISTANT,
+            ACTION_VOICE_SEARCH, ACTION_CAMERA, ACTION_FLASHLIGHT, ACTION_RECENTS,
+            ACTION_LAST_APP, ACTION_PLAY_PAUSE, ACTION_VOLUME_UP, ACTION_VOLUME_DOWN);
 
     private final Context mContext;
     private final PenMipp mMipp;
@@ -89,6 +112,19 @@ final class PenGestures {
     private final Handler mHandler = new Handler(Looper.getMainLooper());
     private final PenPie mPie;
     private final SharedPreferences mPrefs;
+    private final CameraManager.TorchCallback mTorchCallback =
+            new CameraManager.TorchCallback() {
+        @Override
+        public void onTorchModeChanged(String cameraId, boolean enabled) {
+            if (cameraId.equals(mTorchCameraId)) {
+                mTorchEnabled = enabled;
+            }
+        }
+    };
+
+    private CameraManager mCameraManager;
+    private String mTorchCameraId;
+    private boolean mTorchEnabled;
 
     PenGestures(Context context, PenMipp mipp) {
         mContext = context;
@@ -145,6 +181,25 @@ final class PenGestures {
         if (ACTION_NOTES.equals(action) && openNotesApp()) {
             return;
         }
+        if (ACTION_PARTIAL_SCREENSHOT.equals(action)) {
+            new ScreenshotHelper(mContext).takeScreenshot(
+                    WindowManager.TAKE_SCREENSHOT_SELECTED_REGION,
+                    WindowManager.ScreenshotSource.SCREENSHOT_KEY_OTHER, mHandler, null);
+            return;
+        }
+        if (ACTION_CAMERA.equals(action)) {
+            mContext.sendBroadcastAsUser(new Intent(ACTION_SCREEN_CAMERA_GESTURE),
+                    UserHandle.CURRENT, Manifest.permission.STATUS_BAR_SERVICE);
+            return;
+        }
+        if (ACTION_FLASHLIGHT.equals(action)) {
+            toggleTorch();
+            return;
+        }
+        if (ACTION_LAST_APP.equals(action)) {
+            switchToLastApp();
+            return;
+        }
 
         int keyCode = keyCodeFor(action);
         if (keyCode != KeyEvent.KEYCODE_UNKNOWN) {
@@ -168,6 +223,67 @@ final class PenGestures {
         mInputManager.injectInputEvent(down, InputManager.INJECT_INPUT_EVENT_MODE_ASYNC);
         mInputManager.injectInputEvent(KeyEvent.changeAction(down, KeyEvent.ACTION_UP),
                 InputManager.INJECT_INPUT_EVENT_MODE_ASYNC);
+    }
+
+    // the app in front is the first task, the one before it that is not the launcher is next
+    private void switchToLastApp() {
+        try {
+            final int userId = ActivityManager.getCurrentUser();
+            final IActivityManager am = ActivityManager.getService();
+            final ResolveInfo home = mContext.getPackageManager().resolveActivityAsUser(
+                    new Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_HOME),
+                    PackageManager.MATCH_DEFAULT_ONLY, userId);
+            final String homePackage = home != null ? home.activityInfo.packageName : null;
+            final List<ActivityManager.RecentTaskInfo> tasks = am.getRecentTasks(5,
+                    ActivityManager.RECENT_IGNORE_UNAVAILABLE, userId).getList();
+            for (int i = 1; i < tasks.size(); i++) {
+                final ActivityManager.RecentTaskInfo task = tasks.get(i);
+                final ComponentName component = task.origActivity != null
+                        ? task.origActivity : task.baseIntent.getComponent();
+                if (component == null || component.getPackageName().equals(homePackage)
+                        || component.getPackageName().equals("com.android.systemui")) {
+                    continue;
+                }
+                am.moveTaskToFront(null, mContext.getPackageName(), task.id,
+                        ActivityManager.MOVE_TASK_NO_USER_ACTION, null);
+                return;
+            }
+        } catch (RemoteException e) {
+            Log.w(TAG, "Could not switch to the last app", e);
+        }
+    }
+
+    private void toggleTorch() {
+        if (mCameraManager == null) {
+            mCameraManager = mContext.getSystemService(CameraManager.class);
+            mTorchCameraId = findTorchCamera();
+            mCameraManager.registerTorchCallback(mTorchCallback, mHandler);
+        }
+        if (mTorchCameraId == null) {
+            return;
+        }
+        try {
+            mCameraManager.setTorchMode(mTorchCameraId, !mTorchEnabled);
+        } catch (CameraAccessException e) {
+            Log.w(TAG, "Could not toggle the flashlight", e);
+        }
+    }
+
+    private String findTorchCamera() {
+        try {
+            for (String id : mCameraManager.getCameraIdList()) {
+                CameraCharacteristics c = mCameraManager.getCameraCharacteristics(id);
+                Boolean flash = c.get(CameraCharacteristics.FLASH_INFO_AVAILABLE);
+                Integer facing = c.get(CameraCharacteristics.LENS_FACING);
+                if (Boolean.TRUE.equals(flash) && facing != null
+                        && facing == CameraCharacteristics.LENS_FACING_BACK) {
+                    return id;
+                }
+            }
+        } catch (CameraAccessException e) {
+            Log.w(TAG, "Could not find the flashlight", e);
+        }
+        return null;
     }
 
     private void injectScroll(float steps) {
@@ -275,6 +391,12 @@ final class PenGestures {
                 return KeyEvent.KEYCODE_APP_SWITCH;
             case ACTION_PLAY_PAUSE:
                 return KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE;
+            case ACTION_VOICE_SEARCH:
+                return KeyEvent.KEYCODE_VOICE_ASSIST;
+            case ACTION_VOLUME_UP:
+                return KeyEvent.KEYCODE_VOLUME_UP;
+            case ACTION_VOLUME_DOWN:
+                return KeyEvent.KEYCODE_VOLUME_DOWN;
             default:
                 return KeyEvent.KEYCODE_UNKNOWN;
         }

@@ -31,17 +31,31 @@
     <string-array name="pie_action_entries" translatable="false">
         <item>@string/action_notes</item>
         <item>@string/action_screenshot</item>
+        <item>@string/action_partial_screenshot</item>
         <item>@string/action_assistant</item>
+        <item>@string/action_voice_search</item>
+        <item>@string/action_camera</item>
+        <item>@string/action_flashlight</item>
         <item>@string/action_recents</item>
+        <item>@string/action_last_app</item>
         <item>@string/action_play_pause</item>
+        <item>@string/action_volume_up</item>
+        <item>@string/action_volume_down</item>
     </string-array>
 
     <string-array name="pie_action_values" translatable="false">
         <item>notes</item>
         <item>screenshot</item>
+        <item>partial_screenshot</item>
         <item>assistant</item>
+        <item>voice_search</item>
+        <item>camera</item>
+        <item>flashlight</item>
         <item>recents</item>
+        <item>last_app</item>
         <item>play_pause</item>
+        <item>volume_up</item>
+        <item>volume_down</item>
     </string-array>
 
     <string-array name="pie_action_defaults" translatable="false">
