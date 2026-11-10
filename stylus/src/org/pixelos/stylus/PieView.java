@@ -222,6 +222,20 @@ final class PieView extends View {
                 return R.string.action_assistant;
             case PenGestures.ACTION_RECENTS:
                 return R.string.action_recents;
+            case PenGestures.ACTION_PARTIAL_SCREENSHOT:
+                return R.string.action_partial_screenshot;
+            case PenGestures.ACTION_VOICE_SEARCH:
+                return R.string.action_voice_search;
+            case PenGestures.ACTION_CAMERA:
+                return R.string.action_camera;
+            case PenGestures.ACTION_FLASHLIGHT:
+                return R.string.action_flashlight;
+            case PenGestures.ACTION_LAST_APP:
+                return R.string.action_last_app;
+            case PenGestures.ACTION_VOLUME_UP:
+                return R.string.action_volume_up;
+            case PenGestures.ACTION_VOLUME_DOWN:
+                return R.string.action_volume_down;
             default:
                 return R.string.action_play_pause;
         }
@@ -237,6 +251,20 @@ final class PieView extends View {
                 return R.drawable.ic_pie_assistant;
             case PenGestures.ACTION_RECENTS:
                 return R.drawable.ic_pie_recents;
+            case PenGestures.ACTION_PARTIAL_SCREENSHOT:
+                return R.drawable.ic_pie_partial_screenshot;
+            case PenGestures.ACTION_VOICE_SEARCH:
+                return R.drawable.ic_pie_voice_search;
+            case PenGestures.ACTION_CAMERA:
+                return R.drawable.ic_pie_camera;
+            case PenGestures.ACTION_FLASHLIGHT:
+                return R.drawable.ic_pie_flashlight;
+            case PenGestures.ACTION_LAST_APP:
+                return R.drawable.ic_pie_last_app;
+            case PenGestures.ACTION_VOLUME_UP:
+                return R.drawable.ic_pie_volume_up;
+            case PenGestures.ACTION_VOLUME_DOWN:
+                return R.drawable.ic_pie_volume_down;
             default:
                 return R.drawable.ic_pie_play_pause;
         }
