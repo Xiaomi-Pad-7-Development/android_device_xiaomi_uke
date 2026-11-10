@@ -108,6 +108,10 @@ final class StylusDeviceListener implements InputManager.InputDeviceListener {
                 || productId == 0x5081;
     }
 
+    static boolean isPen(InputDevice device) {
+        return device != null && getPenVersion(device.getVendorId(), device.getProductId()) != 0;
+    }
+
     private static int getPenVersion(int vendorId, int productId) {
         if (vendorId == 0x1915) {
             switch (productId) {
