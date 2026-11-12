@@ -119,8 +119,10 @@ TARGET_KERNEL_CONFIG := \
 TARGET_KERNEL_CONFIG_EXT := \
     $(DEVICE_PATH)/configs/kernel/uke_GKI.config \
     $(DEVICE_PATH)/configs/kernel/uke_consolidate.config \
-    $(DEVICE_PATH)/configs/kernel/uke_recovered.config
+    $(DEVICE_PATH)/configs/kernel/uke_recovered.config \
+    $(DEVICE_PATH)/configs/kernel/uke_perf.config
 TARGET_KERNEL_CLANG_COMPILE := true
+KERNEL_LTO := thin
 # Do not pass TARGET_PRODUCT here: the audio Kbuilds gate per-device config
 # with $(word 2,$(subst _, ,$(TARGET_PRODUCT))) and a bare "uke" has no second
 # token, which silently compiles out -DCONFIG_TARGET_PRODUCT_UKE (no speaker
