@@ -25,3 +25,6 @@ binder_call(hal_touchfeature_xiaomi_default, system_server)
 
 set_prop(hal_touchfeature_xiaomi_default, vendor_touch_hostprocess_prop)
 set_prop(hal_touchfeature_xiaomi_default, vendor_touchfeature_prop)
+
+# touch-report probes /data/vendor/bsplog for its debug logs; it does not need them
+dontaudit hal_touchfeature_xiaomi_default vendor_ramdump_vendor_data_file:dir search;

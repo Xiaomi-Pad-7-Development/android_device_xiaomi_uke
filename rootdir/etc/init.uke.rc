@@ -22,6 +22,9 @@ on post-fs-data
     chown system system /dev/cpu_dma_latency
     chmod 0664 /dev/cpu_dma_latency
 
+    # subsystem_ramdump writes RPM logs here but does not create it
+    mkdir /data/vendor/bsplog 0770 system system
+
 on property:sys.boot_completed=1
     # Enable PowerHAL hint processing
     setprop vendor.powerhal.init 1
