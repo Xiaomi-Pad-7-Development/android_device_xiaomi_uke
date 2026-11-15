@@ -45,11 +45,12 @@ import java.util.Set;
 
 /*
  * The Focus Pen Pro sends its squeeze, double tap and swipe gestures in
- * HID report 2, one keyboard usage per gesture. The kernel keeps that
- * report off the input devices, so the gestures come from hidraw and each
- * one runs its action here as an injected key or scroll. A pen app
+ * HID report 2, one keyboard usage per gesture. The gestures are read
+ * from hidraw and each one runs its action here as an injected key or
+ * scroll. The kernel also reports them as keys of the pen input device,
+ * which the key layout maps to the button keys stock sends. A pen app
  * that asked the pencil engine for the gestures gets the double tap and
- * swipes itself while it is in front, as the button keys stock sends it.
+ * swipes from those keys while it is in front, so no action runs then.
  */
 final class PenGestures {
 
@@ -149,9 +150,9 @@ final class PenGestures {
 
         if (!SQUEEZE.equals(gesture)
                 && PencilEngineManagerService.wantsGestures(focusedPackage())) {
-            Log.i(TAG, "Pen " + gesture + ", passing it to the app");
+            // the app gets the gesture as the button key of the pen input device
+            Log.i(TAG, "Pen " + gesture + ", leaving it to the app");
             vibrate(gesture);
-            injectKey(appKeyCodeFor(gesture));
             return;
         }
 
@@ -333,17 +334,6 @@ final class PenGestures {
                 return SWIPE_DOWN;
             default:
                 return null;
-        }
-    }
-
-    private static int appKeyCodeFor(String gesture) {
-        switch (gesture) {
-            case DOUBLE_TAP:
-                return KeyEvent.KEYCODE_BUTTON_8;
-            case SWIPE_UP:
-                return KeyEvent.KEYCODE_BUTTON_9;
-            default:
-                return KeyEvent.KEYCODE_BUTTON_10;
         }
     }
 
