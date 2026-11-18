@@ -46,3 +46,6 @@ remote_provisioning.hostname=remoteprovisioning.googleapis.com
 
 # Surfaceflinger
 persist.sys.sf_charge_anim_supported=true
+
+# Stock fingerprint for the India and POCO SKUs
+import /product/etc/${ro.boot.product.hardware.sku}_fingerprint.prop

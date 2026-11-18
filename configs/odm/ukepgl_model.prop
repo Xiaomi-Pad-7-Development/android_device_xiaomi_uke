@@ -1,5 +1,4 @@
-# POCO Pad X1: report its own model and brand. Only the identity is taken from
-# stock, not its build fingerprints, so Play does not treat this as a stock build.
+# POCO Pad X1: report its own model and brand, as the stock odm does.
 ro.product.odm.brand=POCO
 ro.product.odm.model=25099RP08G
 ro.product.odm.marketname=POCO Pad X1

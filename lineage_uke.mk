@@ -32,7 +32,8 @@ PRODUCT_MANUFACTURER := Xiaomi
 PRODUCT_MODEL := 2410CRP4CG
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
-    BuildDesc="missi-user 16 BP2A.250605.031.A3 OS3.0.304.0.WOZMIXM release-keys"
+    BuildDesc="missi-user 16 BP2A.250605.031.A3 16OS3.1.260910.213948582.QCPDGL.S release-keys" \
+    BuildFingerprint=Xiaomi/uke_global/uke:16/BP2A.250605.031.A3/OS3.0.304.0.WOZMIXM:user/release-keys
 
 # Axion Device Configuration
 AXION_MAINTAINER := delano-git

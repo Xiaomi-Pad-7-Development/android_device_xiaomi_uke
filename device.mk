@@ -230,6 +230,11 @@ PRODUCT_COPY_FILES += \
     $(DEVICE_PATH)/configs/odm/ukein_model.prop:$(TARGET_COPY_OUT_ODM)/etc/ukein_model.prop \
     $(DEVICE_PATH)/configs/odm/ukepgl_model.prop:$(TARGET_COPY_OUT_ODM)/etc/ukepgl_model.prop
 
+# Fingerprint per SKU, imported by product.prop
+PRODUCT_COPY_FILES += \
+    $(DEVICE_PATH)/configs/product/ukein_fingerprint.prop:$(TARGET_COPY_OUT_PRODUCT)/etc/ukein_fingerprint.prop \
+    $(DEVICE_PATH)/configs/product/ukepgl_fingerprint.prop:$(TARGET_COPY_OUT_PRODUCT)/etc/ukepgl_fingerprint.prop
+
 # Keylayout
 PRODUCT_COPY_FILES += \
     $(DEVICE_PATH)/configs/keylayout/uinput-xiaomi.kl:$(TARGET_COPY_OUT_ODM)/usr/keylayout/uinput-xiaomi.kl \

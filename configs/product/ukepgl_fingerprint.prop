@@ -1,0 +1,3 @@
+# POCO Pad X1: report the stock fingerprint of its own build. Loaded from
+# product, as odm may not set ro.build.fingerprint.
+ro.build.fingerprint=POCO/uke_p_global/uke:16/BP2A.250605.031.A3/OS3.0.304.0.WOZMIXM:user/release-keys
