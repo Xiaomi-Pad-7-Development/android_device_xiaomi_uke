@@ -328,7 +328,7 @@
       "Path": "/dev/cpu_dma_latency",
       "Values": [
         "1",
-        "2000000000"
+        "77359400"
       ],
       "DefaultIndex": 1,
       "HoldFd": true
