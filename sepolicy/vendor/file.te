@@ -1,5 +1,4 @@
 type camera_persist_file, file_type, mlstrustedobject, vendor_persist_type;
-type hal_camera_data_file, data_file_type, file_type;
 type proc_tp_file, fs_type, proc_type;
 type proc_tp_lockdown, fs_type, proc_type;
 type sysfs_keyboard_status, fs_type, sysfs_type;

@@ -11,8 +11,6 @@ allow hal_camera_default self:capability ipc_lock;
 allow hal_camera_default sysfs:file r_file_perms;
 allow hal_camera_default sysfs_thermal:file write;
 allow hal_camera_default vendor_camera_data_file:sock_file create_file_perms;
-allow hal_camera_default hal_camera_data_file:dir create_dir_perms;
-allow hal_camera_default hal_camera_data_file:file create_file_perms;
 allow hal_camera_default { camera_device vendor_displayfeature_device }:chr_file rw_file_perms;
 allow hal_camera_default vendor_sysfs_camera:file write;
 
