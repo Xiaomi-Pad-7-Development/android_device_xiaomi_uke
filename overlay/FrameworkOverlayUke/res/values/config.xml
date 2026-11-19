@@ -145,8 +145,10 @@
     <!-- Whether device supports double tap to wake -->
     <bool name="config_supportDoubleTapWake">true</bool>
 
-    <!-- Doze: tablets should not wake up on table movement / pickup -->
-    <bool name="config_dozePulsePickup">false</bool>
+    <!-- Doze: offer the pickup gesture, but keep it off by default so the
+         tablet doesn't wake up on table movement unless the user wants it -->
+    <bool name="config_dozePulsePickup">true</bool>
+    <bool name="config_dozePickupGestureEnabled">false</bool>
 
     <!-- Array of desired screen brightness in nits corresponding to the lux values
          in the config_autoBrightnessLevels array. The display brightness is defined as the measured
