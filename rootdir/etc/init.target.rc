@@ -355,6 +355,10 @@ on early-boot
     verity_update_state
 
 on boot
+    # Socket buffer ceilings from stock nicmd.rc
+    write /proc/sys/net/core/rmem_max 16777216
+    write /proc/sys/net/core/wmem_max 8388608
+
     write /dev/cpuset/audio-app/cpus 0-7
     # Add a cpuset for the camera daemon
     # We want all cores for camera
