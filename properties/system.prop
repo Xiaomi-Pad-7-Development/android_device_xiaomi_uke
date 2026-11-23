@@ -45,7 +45,7 @@ mmp.enable.3g2=true
 vendor.mm.enable.qcom_parser=16777215
 
 # SSR
-persist.vendor.ssr.enable_ramdumps=1
+persist.vendor.ssr.enable_ramdumps=0
 
 # Surfaceflinger
 debug.sf.enable_hwc_vds=0
