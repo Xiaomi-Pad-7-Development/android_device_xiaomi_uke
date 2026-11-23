@@ -129,6 +129,9 @@ KERNEL_LTO := thin
 # token, which silently compiles out -DCONFIG_TARGET_PRODUCT_UKE (no speaker
 # dailink, audio falls back to msm-stub-codec).
 TARGET_KERNEL_ADDITIONAL_FLAGS := LLVM=1 LLVM_IAS=1
+# Name the kernel like a GKI build (6.1.x-android14-11-...), as stock does.
+TARGET_KERNEL_ADDITIONAL_FLAGS += BRANCH=android14-6.1 KMI_GENERATION=11
+TARGET_KERNEL_ADDITIONAL_FLAGS += KBUILD_BUILD_USER=delano KBUILD_BUILD_HOST=axion
 
 TARGET_NEEDS_DTBOIMAGE := true
 BOARD_USES_QCOM_MERGE_DTBS_SCRIPT := true
