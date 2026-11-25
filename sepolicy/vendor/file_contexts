@@ -24,9 +24,6 @@
 # Hypsys
 /vendor/bin/hw/xiaomi\.system\.hypsys\.common-service    u:object_r:hal_hypsys_vendor_exec:s0
 
-# IR
-/dev/ir_spi    u:object_r:ir_spi_device:s0
-
 # Lights HAL
 /vendor/bin/hw/android\.hardware\.lights-service\.xiaomi    u:object_r:hal_light_default_exec:s0
 
