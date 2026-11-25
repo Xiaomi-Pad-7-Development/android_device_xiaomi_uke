@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+     SPDX-FileCopyrightText: 2026 The AxionAOSP Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+
+<!-- Software Dolby TrueHD decoder from the FFmpeg Codec2 store (IComponentStore/ffmpeg).
+     audio/true-hd is the MIME type Media3/ExoPlayer apps use for TrueHD tracks. -->
+<Included>
+    <Decoders>
+        <MediaCodec name="c2.ffmpeg.truehd.decoder" >
+            <Type name="audio/vnd.dolby.mlp">
+                <Limit name="channel-count" max="8" />
+                <Limit name="sample-rate" ranges="44100,48000,88200,96000,176400,192000" />
+                <Limit name="bitrate" range="8000-18000000" />
+            </Type>
+            <Type name="audio/true-hd">
+                <Limit name="channel-count" max="8" />
+                <Limit name="sample-rate" ranges="44100,48000,88200,96000,176400,192000" />
+                <Limit name="bitrate" range="8000-18000000" />
+            </Type>
+            <Attribute name="software-codec" />
+        </MediaCodec>
+    </Decoders>
+</Included>

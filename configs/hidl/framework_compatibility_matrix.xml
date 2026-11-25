@@ -7,6 +7,14 @@
             <instance>dolby</instance>
         </interface>
     </hal>
+    <hal format="hidl" optional="true">
+        <name>android.hardware.media.c2</name>
+        <version>1.2</version>
+        <interface>
+            <name>IComponentStore</name>
+            <instance>ffmpeg</instance>
+        </interface>
+    </hal>
     <hal format="aidl" optional="true">
         <name>com.fingerprints.extension3</name>
         <interface>

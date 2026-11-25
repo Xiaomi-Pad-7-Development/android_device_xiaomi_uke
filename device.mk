@@ -123,6 +123,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     DolbyAtmos
 
+# FFmpeg Codec2 (software Dolby TrueHD decoder)
+PRODUCT_PACKAGES += \
+    android.hardware.media.c2@1.2-service-ffmpeg
+
 # DRM
 PRODUCT_PACKAGES += \
     android.hardware.drm-service.clearkey
